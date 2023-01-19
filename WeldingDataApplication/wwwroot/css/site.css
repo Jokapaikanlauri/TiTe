@@ -1,19 +1,38 @@
 html {
-  font-size: 14px;
-  background-color: aqua;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    height: 100%;
+    min-width: 80%;
+    margin-bottom: 60px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+
+
+
+.cont {
+    min-height: 300px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: darkred;
+    display: flex;
+    margin: 10px;
+    border-radius: 25px;
+}
+container {
+    color: black;
+}
+footer {
+    background-color: darkred;
+
 }

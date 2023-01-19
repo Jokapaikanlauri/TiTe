@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\halon\\source\\repos\\group-1\\WeldingDataApplication\\WeldingDataApplication.csproj": {}
+    "D:\\Visual Studio Projektit\\TTP\\group-1\\WeldingDataApplication\\WeldingDataApplication.csproj": {}
   },
   "projects": {
-    "C:\\Users\\halon\\source\\repos\\group-1\\WeldingDataApplication\\WeldingDataApplication.csproj": {
+    "D:\\Visual Studio Projektit\\TTP\\group-1\\WeldingDataApplication\\WeldingDataApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\halon\\source\\repos\\group-1\\WeldingDataApplication\\WeldingDataApplication.csproj",
+        "projectUniqueName": "D:\\Visual Studio Projektit\\TTP\\group-1\\WeldingDataApplication\\WeldingDataApplication.csproj",
         "projectName": "WeldingDataApplication",
-        "projectPath": "C:\\Users\\halon\\source\\repos\\group-1\\WeldingDataApplication\\WeldingDataApplication.csproj",
-        "packagesPath": "C:\\Users\\halon\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\halon\\source\\repos\\group-1\\WeldingDataApplication\\obj\\",
+        "projectPath": "D:\\Visual Studio Projektit\\TTP\\group-1\\WeldingDataApplication\\WeldingDataApplication.csproj",
+        "packagesPath": "C:\\Users\\unelm\\.nuget\\packages\\",
+        "outputPath": "D:\\Visual Studio Projektit\\TTP\\group-1\\WeldingDataApplication\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\halon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\unelm\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -58,7 +58,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
