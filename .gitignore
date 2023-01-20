@@ -4,3 +4,8 @@
 **/.vs/*
 /WeldingDataApplication/obj/Debug/net6.0/WeldingDataApplication.assets.cache
 /WeldingDataApplication/obj/Debug/net6.0/WeldingDataApplication.GeneratedMSBuildEditorConfig.editorconfig
+/WeldingDataApplication/.vs/WeldingDataApplication/v17/.suo
+/WeldingDataApplication/obj/project.assets.json
+/WeldingDataApplication/obj/project.nuget.cache
+/WeldingDataApplication/obj/WeldingDataApplication.csproj.nuget.dgspec.json
+/WeldingDataApplication/obj/WeldingDataApplication.csproj.nuget.g.props
