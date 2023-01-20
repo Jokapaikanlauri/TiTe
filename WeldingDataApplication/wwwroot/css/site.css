@@ -13,6 +13,8 @@
 
 
 .navigation {
+    padding-right:10px;
+    margin-top: 10px;
     width: 15%;
     float: left;
     height: 100vh;
@@ -20,20 +22,17 @@
 }
 
 .body {
+    
     width: 85%; 
     float: left;
     height: 100vh; 
     background-color: #fff;
-    overflow-y: scroll; 
 }
-
 
 .content {
     margin-top:150px;   
-    botton:0;
+    bottom:0;
 }
-
-
 
 .info {
     min-height: 300px;
@@ -42,4 +41,37 @@
     background-color: darkred;
     display: flex;
     margin-top: 10px;
+    border-radius: 25px;
+}
+
+.details {
+    display:table-header-group;
+    font: 24px arial;
+    min-height: 30px;
+    border-radius: 25px;
+    margin: 1em;
+    padding: 2em;
+    background-color: dimgrey;
+}
+
+.details .moredetails p{
+    margin:0.5em;
+    font: 20px arial;
+    color: hotpink;
+    display: flex;
+    grid-area: auto;
+}
+
+.nav-item {
+    
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
+    height: 150px;
+    background-color: green;
+    top: 0;
+}
+
+.nav-item:hover {
+        background-color: #f5f5f5;
 }

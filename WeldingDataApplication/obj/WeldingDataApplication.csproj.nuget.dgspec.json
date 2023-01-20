@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Visual Studio Projektit\\TTP\\group-1\\WeldingDataApplication\\WeldingDataApplication.csproj": {}
+    "D:\\Kouluhommat\\TiTe-Projekti\\Projekti\\Tietotekniikkaprojekti\\WeldingDataApplication\\WeldingDataApplication.csproj": {}
   },
   "projects": {
-    "D:\\Visual Studio Projektit\\TTP\\group-1\\WeldingDataApplication\\WeldingDataApplication.csproj": {
+    "D:\\Kouluhommat\\TiTe-Projekti\\Projekti\\Tietotekniikkaprojekti\\WeldingDataApplication\\WeldingDataApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Visual Studio Projektit\\TTP\\group-1\\WeldingDataApplication\\WeldingDataApplication.csproj",
+        "projectUniqueName": "D:\\Kouluhommat\\TiTe-Projekti\\Projekti\\Tietotekniikkaprojekti\\WeldingDataApplication\\WeldingDataApplication.csproj",
         "projectName": "WeldingDataApplication",
-        "projectPath": "D:\\Visual Studio Projektit\\TTP\\group-1\\WeldingDataApplication\\WeldingDataApplication.csproj",
-        "packagesPath": "C:\\Users\\unelm\\.nuget\\packages\\",
-        "outputPath": "D:\\Visual Studio Projektit\\TTP\\group-1\\WeldingDataApplication\\obj\\",
+        "projectPath": "D:\\Kouluhommat\\TiTe-Projekti\\Projekti\\Tietotekniikkaprojekti\\WeldingDataApplication\\WeldingDataApplication.csproj",
+        "packagesPath": "C:\\Users\\harti\\.nuget\\packages\\",
+        "outputPath": "D:\\Kouluhommat\\TiTe-Projekti\\Projekti\\Tietotekniikkaprojekti\\WeldingDataApplication\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\unelm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\harti\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -45,8 +45,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -58,7 +57,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }
