@@ -59,37 +59,60 @@
     margin: 0;
     display: flex;
 
-    background-color: #eeeef0;
+    background-color: #ffffff;
     margin-bottom: 5px;
     border-top: 5px solid green;
     border-radius: 25px;
     border-bottom: 5px solid orange;
 }
 
-.details {
-    display:table-header-group;
-    font: 24px arial;
-    min-height: 30px;
-    border-radius: 25px;
-    margin: 1em;
-    padding: 2em;
-    background-color: dimgrey;
-}
-
-.details .moredetails p{
-    margin:0.5em;
-    font: 20px arial;
-    color: hotpink;
-    display: flex;
-    grid-area: auto;
-}
 
 .nav-item {
     
     display: inline-block; 
     cursor: pointer;
-   
-  
- 
 }
 
+.grid {
+    border:solid 2px; 
+    border-radius:25px;
+    padding: 50px;
+    display: grid;
+    grid-template-areas:
+        "otsikko otsikko otsikko otsikko"
+        "one one two two"
+        "three three three three";
+    gap: 10px;
+    grid-template-columns: (4, 1fr);
+    inline-size: 500px;
+    margin-top:36px;
+}
+.otsikko {
+    margin-left:20px;
+    display: grid;
+    font:bold x-large ariel;
+}
+.grid :hover {
+    background-color: lightgrey;
+}
+
+    .grid > * {
+        text-align: center;
+        
+        border-radius: 5px;
+        padding-top: 50px;
+    }
+.one {
+    grid-area: one;
+
+}
+
+.two {
+    grid-area: two;
+
+}
+
+.three {
+    grid-area: three;
+    
+}
