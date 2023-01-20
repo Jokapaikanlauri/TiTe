@@ -11,8 +11,6 @@
     border-bottom: 5px solid red;
     display: flex;
     align-items: center;
-
-
 }
 
 
@@ -27,30 +25,31 @@
     padding-right: 10px;
     border-right: 5px solid white;
 }
+
 .navigationlink {
-    width: 100%;
+    width: 104%;
     height: 50px;
-    border: 2px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.navigationlink:active {
-    background-color: #8397b5;
-    color:white;
-}
+
+    .navigationlink:active {
+        background-color: #8397b5;
+        color: white;
+    }
 
 .mainbody {
-    
     width: 85%;
     float: right;
     height: calc(100vh - 150px);
-    overflow-y:auto
+    overflow-y: auto;
+    padding-left: 5%;
 }
 
 .content {
-    margin-top:150px;   
-    bottom:0;
+    margin-top: 150px;
+    bottom: 0;
 }
 
 .info {
@@ -58,24 +57,22 @@
     padding: 0;
     margin: 0;
     display: flex;
-
     background-color: #ffffff;
     margin-bottom: 5px;
-    border-top: 5px solid green;
-    border-radius: 25px;
-    border-bottom: 5px solid orange;
+    border-top: 2px solid green;
+    border-bottom: 2px solid orange;
+    width: 90%;
 }
 
 
 .nav-item {
-    
-    display: inline-block; 
+    display: inline-block;
     cursor: pointer;
 }
 
 .grid {
-    border:solid 2px; 
-    border-radius:25px;
+    border: solid 2px;
+    border-radius: 25px;
     padding: 50px;
     display: grid;
     grid-template-areas:
@@ -85,34 +82,33 @@
     gap: 10px;
     grid-template-columns: (4, 1fr);
     inline-size: 500px;
-    margin-top:36px;
+    margin-top: 36px;
 }
+
 .otsikko {
-    margin-left:20px;
+    margin-left: 20px;
     display: grid;
-    font:bold x-large ariel;
+    font: bold x-large ariel;
 }
+
 .grid :hover {
     background-color: lightgrey;
 }
 
-    .grid > * {
-        text-align: center;
-        
-        border-radius: 5px;
-        padding-top: 50px;
-    }
+.grid > * {
+    text-align: center;
+    border-radius: 5px;
+    padding-top: 50px;
+}
+
 .one {
     grid-area: one;
-
 }
 
 .two {
     grid-area: two;
-
 }
 
 .three {
     grid-area: three;
-    
 }
