@@ -10,15 +10,25 @@
 </head>
 <body>
 <div class="parent">
-   <div class="header"> </div>
+        <div class="header">
+            <img src="~/images/logo.png" alt="logo" style="height:100px;">    
+            <div class="nav-item" onclick="index()"><img src="~/images/home.png"></div>
+            <div class="nav-item" onclick="log()"><img src="~/images/error.png"></div>
+        </div>
 
  <div class="content">
     <div class="navigation"> </div>
     <div class="body">@RenderBody() </div>
 </div>
+<script>
+   function index() {
+        window.location.href = '/';
+    } 
 
-
-
+    function log() {
+        window.location.href = '/log';
+    }
+        </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
