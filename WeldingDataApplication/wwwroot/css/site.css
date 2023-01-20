@@ -71,7 +71,7 @@
 }
 
 .grid {
-    border: solid 2px;
+    border: 2px solid grey;
     border-radius: 25px;
     padding: 50px;
     display: grid;
@@ -80,9 +80,8 @@
         "one one two two"
         "three three three three";
     gap: 10px;
-    grid-template-columns: (4, 1fr);
-    inline-size: 500px;
-    margin-top: 36px;
+    min-width: 300px;
+    margin: 36px;
 }
 
 .otsikko {
@@ -96,12 +95,14 @@
 }
 
 .grid > * {
+    
     text-align: center;
     border-radius: 5px;
-    padding-top: 50px;
+    padding-top: 15px;
 }
 
 .one {
+
     grid-area: one;
 }
 
