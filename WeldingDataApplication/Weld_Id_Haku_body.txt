@@ -1,0 +1,81 @@
+﻿{
+  "WeldId": "00000000-0000-0000-0000-000000000000",
+  "PartItemNumber": "string",
+  "PartSerialNumber": "string",
+  "ProcessingStepNumber": "string",
+  "MachineSerialNumber": "string",
+  "MachineType": "Tps",
+  "Model": "string",
+  "Welder": "string",
+  "TimeStamp": "2023-02-01T05:54:13.765Z",
+  "Duration": 0,
+  "WeldData": {
+    "Stats": [
+      {
+        "Max": 0,
+        "Mean": 0,
+        "Min": 0,
+        "Name": "string",
+        "Unit": "string"
+      }
+    ],
+    "LimitViolations": [
+      {
+        "ValueType": "string",
+        "ViolationType": "string"
+      }
+    ],
+    "Sections": [
+      {
+        "Number": 0,
+        "JobInfo": {
+          "Name": "string",
+          "Nr": 0,
+          "Revision": 0,
+          "IsDeleted": true,
+          "LastModified": "2023-02-01T05:54:13.765Z",
+          "Details": "string"
+        },
+        "Details": "string"
+      }
+    ],
+    "SingleStats": [
+      {
+        "Name": "string",
+        "Value": "string",
+        "Unit": "string"
+      }
+    ]
+  },
+  "Errors": [
+    {
+      "ErrorCode": "string"
+    }
+  ],
+  "IsCompleted": true,
+  "Units": {},
+  "ActualValues": "string",
+  "ProgramNumber": 0,
+  "State": "Ok",
+  "Changes": [
+    {
+      "WeldingId": "00000000-0000-0000-0000-000000000000",
+      "State": "Ok",
+      "User": "string",
+      "Explanation": "string",
+      "TimestampUtc": "2023-02-01T05:54:13.765Z",
+      "EventId": "00000000-0000-0000-0000-000000000000"
+    }
+  ],
+  "ResponseMetadata": {
+    "Version": "string",
+    "GetsDeprecated": true,
+    "Errors": [
+      {
+        "ErrorCode": 0,
+        "ErrorCodeName": "string",
+        "Description": "string"
+      }
+    ]
+  }
+}

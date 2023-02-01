@@ -1,0 +1,95 @@
+﻿
+{
+  "WeldInfos": [
+    {
+      "Id": "0d5d718c-36fb-469c-8719-1dbb7faede30",
+      "Timestamp": "2023-01-25T18:50:36.169Z",
+      "ProcessingStepNumber": "11",
+      "PartSerialNumber": "10133",
+      "PartArticleNumber": "p70979",
+      "MachineType": "Tpsi",
+      "MachineSerialNumber": "31141973",
+      "Details": "http://weldcube.ky.local/api/v4/Welds/0d5d718c-36fb-469c-8719-1dbb7faede30",
+      "State": "NotOk",
+      "Welder": "admin"
+    },
+    {
+      "Id": "4b40409a-d310-478b-9edd-2b3cea2b522a",
+      "Timestamp": "2023-01-25T18:39:24.138Z",
+      "ProcessingStepNumber": "10",
+      "PartSerialNumber": "10133",
+      "PartArticleNumber": "p70979",
+      "MachineType": "Tpsi",
+      "MachineSerialNumber": "31141973",
+      "Details": "http://weldcube.ky.local/api/v4/Welds/4b40409a-d310-478b-9edd-2b3cea2b522a",
+      "State": "NotOk",
+      "Welder": "admin"
+    },
+    {
+      "Id": "150af864-b763-4db8-b8a7-1c4289a0f40a",
+      "Timestamp": "2023-01-25T18:30:12.312Z",
+      "ProcessingStepNumber": "9",
+      "PartSerialNumber": "10133",
+      "PartArticleNumber": "p70979",
+      "MachineType": "Tpsi",
+      "MachineSerialNumber": "31141973",
+      "Details": "http://weldcube.ky.local/api/v4/Welds/150af864-b763-4db8-b8a7-1c4289a0f40a",
+      "State": "NotOk",
+      "Welder": "admin"
+    },
+    {
+      "Id": "b3e4bb8a-1399-4f3f-a8e3-a879496a5503",
+      "Timestamp": "2023-01-25T18:23:38.799Z",
+      "ProcessingStepNumber": "8",
+      "PartSerialNumber": "10133",
+      "PartArticleNumber": "p70979",
+      "MachineType": "Tpsi",
+      "MachineSerialNumber": "31141973",
+      "Details": "http://weldcube.ky.local/api/v4/Welds/b3e4bb8a-1399-4f3f-a8e3-a879496a5503",
+      "State": "NotOk",
+      "Welder": "admin"
+    },
+    {
+      "Id": "210f0e6f-cf37-40d3-a7ae-d24d2e15abfe",
+      "Timestamp": "2023-01-25T18:17:50.082Z",
+      "ProcessingStepNumber": "7",
+      "PartSerialNumber": "10133",
+      "PartArticleNumber": "p70979",
+      "MachineType": "Tpsi",
+      "MachineSerialNumber": "31141973",
+      "Details": "http://weldcube.ky.local/api/v4/Welds/210f0e6f-cf37-40d3-a7ae-d24d2e15abfe",
+      "State": "NotOk",
+      "Welder": "admin"
+    },
+    {
+      "Id": "200ceb27-7375-4ecd-8b5d-c3be62d261ad",
+      "Timestamp": "2023-01-25T18:12:46.949Z",
+      "ProcessingStepNumber": "6",
+      "PartSerialNumber": "10133",
+      "PartArticleNumber": "p70979",
+      "MachineType": "Tpsi",
+      "MachineSerialNumber": "31141973",
+      "Details": "http://weldcube.ky.local/api/v4/Welds/200ceb27-7375-4ecd-8b5d-c3be62d261ad",
+      "State": "NotOk",
+      "Welder": "admin"
+    },
+    {
+      "Id": "32982a88-7340-457a-b5da-dd121cb24b95",
+      "Timestamp": "2023-01-25T18:07:43.322Z",
+      "ProcessingStepNumber": "5",
+      "PartSerialNumber": "10133",
+      "PartArticleNumber": "p70979",
+      "MachineType": "Tpsi",
+      "MachineSerialNumber": "31141973",
+      "Details": "http://weldcube.ky.local/api/v4/Welds/32982a88-7340-457a-b5da-dd121cb24b95",
+      "State": "NotOk",
+      "Welder": "admin"
+    },
+   
+  ],
+  "ResponseMetadata": {
+    "Version": "v4",
+    "GetsDeprecated": false,
+    "Errors": []
+  }
+}

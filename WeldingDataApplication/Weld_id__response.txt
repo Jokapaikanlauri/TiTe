@@ -1,0 +1,194 @@
+﻿{
+  "WeldId": "4b40409a-d310-478b-9edd-2b3cea2b522a",
+  "PartItemNumber": "p70979",
+  "PartSerialNumber": "10133",
+  "ProcessingStepNumber": "10",
+  "MachineSerialNumber": "31141973",
+  "MachineType": "Tpsi",
+  "Model": "TPS 600i PULSE",
+  "Welder": "admin",
+  "TimeStamp": "2023-01-25T18:39:24.138Z",
+  "Duration": 121,
+  "WeldData": {
+    "Stats": [
+      {
+        "Max": 328.875,
+        "Mean": 259.38775634765625,
+        "Min": 0,
+        "Name": "I",
+        "Unit": "A"
+      },
+      {
+        "Max": 73.0078125,
+        "Mean": 24.227493286132812,
+        "Min": 0.03125,
+        "Name": "U",
+        "Unit": "V"
+      },
+      {
+        "Max": 12.48828125,
+        "Mean": 11.299324035644531,
+        "Min": -0.1640625,
+        "Name": "Wfs",
+        "Unit": "m/min"
+      },
+      {
+        "Max": 8094,
+        "Mean": 7239.1591796875,
+        "Min": 0.00146484375,
+        "Name": "Power",
+        "Unit": "W"
+      },
+      {
+        "Max": 48,
+        "Mean": 48,
+        "Min": 48,
+        "Name": "Welding speed",
+        "Unit": "cm/min"
+      },
+      {
+        "Max": 0.7571998834609985,
+        "Mean": 0.42509925365448,
+        "Min": 0,
+        "Name": "Motor current M1",
+        "Unit": "A"
+      },
+      {
+        "Max": 37.473358154296875,
+        "Mean": 14.23980712890625,
+        "Min": 0,
+        "Name": "Motor force M1",
+        "Unit": "N"
+      }
+    ],
+    "LimitViolations": [
+      {
+        "ValueType": "Voltage",
+        "ViolationType": "Upper"
+      },
+      {
+        "ValueType": "WireFeedSpeed",
+        "ViolationType": "Upper"
+      }
+    ],
+    "Sections": [
+      {
+        "Number": 1,
+        "JobInfo": {
+          "Name": "srgMAG",
+          "Nr": 6,
+          "Revision": 6,
+          "IsDeleted": false,
+          "LastModified": "2022-11-14T12:27:51Z",
+          "Details": "http://weldcube.ky.local/api/v4/Machines/31141973/Jobs/6?revision=6&mcuSerialNumber=30481000635400022&date=2022-11-14%2010%3A27%3A51.000"
+        },
+        "Details": "http://weldcube.ky.local/api/v4/Welds/4b40409a-d310-478b-9edd-2b3cea2b522a/Sections/1"
+      },
+      {
+        "Number": 2,
+        "JobInfo": {
+          "Name": "",
+          "Nr": 8,
+          "Revision": 6,
+          "IsDeleted": true,
+          "LastModified": "0001-01-01T00:00:00Z",
+          "Details": "http://weldcube.ky.local/api/v4/Machines/31141973/Jobs/8?revision=6&mcuSerialNumber=30481000635400022&date=0001-01-01%2000%3A00%3A00.000"
+        },
+        "Details": "http://weldcube.ky.local/api/v4/Welds/4b40409a-d310-478b-9edd-2b3cea2b522a/Sections/2"
+      },
+      {
+        "Number": 3,
+        "JobInfo": {
+          "Name": "m",
+          "Nr": 8,
+          "Revision": 21,
+          "IsDeleted": false,
+          "LastModified": "2023-01-18T05:10:51Z",
+          "Details": "http://weldcube.ky.local/api/v4/Machines/31141973/Jobs/8?revision=21&mcuSerialNumber=30481000635400022&date=2023-01-18%2003%3A10%3A51.000"
+        },
+        "Details": "http://weldcube.ky.local/api/v4/Welds/4b40409a-d310-478b-9edd-2b3cea2b522a/Sections/3"
+      },
+      {
+        "Number": 4,
+        "JobInfo": {
+          "Name": "m",
+          "Nr": 8,
+          "Revision": 21,
+          "IsDeleted": false,
+          "LastModified": "2023-01-18T05:10:51Z",
+          "Details": "http://weldcube.ky.local/api/v4/Machines/31141973/Jobs/8?revision=21&mcuSerialNumber=30481000635400022&date=2023-01-18%2003%3A10%3A51.000"
+        },
+        "Details": "http://weldcube.ky.local/api/v4/Welds/4b40409a-d310-478b-9edd-2b3cea2b522a/Sections/4"
+      }
+    ],
+    "SingleStats": [
+      {
+        "Name": "Wire consumption (length)",
+        "Value": "22.78697",
+        "Unit": "m"
+      },
+      {
+        "Name": "Wire consumption (weight)",
+        "Value": "202.31",
+        "Unit": "g"
+      },
+      {
+        "Name": "Wire consumption (volume)",
+        "Value": "25771.4561",
+        "Unit": "mm³"
+      },
+      {
+        "Name": "Arc gas consumption",
+        "Value": "42.0763664245605",
+        "Unit": "l"
+      },
+      {
+        "Name": "Energy",
+        "Value": "876.6773",
+        "Unit": "kJ"
+      },
+      {
+        "Name": "Arc energy",
+        "Value": "9.056583",
+        "Unit": "kJ/cm"
+      },
+      {
+        "Name": "Seam length",
+        "Value": "0.968",
+        "Unit": "m"
+      }
+    ]
+  },
+  "Errors": [],
+  "IsCompleted": true,
+  "Units": {
+    "Current": "A",
+    "Voltage": "V",
+    "WirefeedSpeed": "m/min",
+    "Power": "W",
+    "WeldingSpeed": "cm/min",
+    "MotorCurrent1": "A",
+    "MotorForce1": "N",
+    "MotorCurrent2": "A",
+    "MotorForce2": "N",
+    "MotorCurrent3": "A",
+    "MotorForce3": "N",
+    "GasFlowRate": "l/min",
+    "Time": "s",
+    "Wire consumption (length)": "m",
+    "Wire consumption (weight)": "g",
+    "Wire consumption (volume)": "mm³",
+    "Energy": "kJ",
+    "Gas consumption": "l",
+    "Arc energy": "kJ/cm",
+    "Seam length": "m"
+  },
+  "ActualValues": "http://weldcube.ky.local/api/v4/Welds/4b40409a-d310-478b-9edd-2b3cea2b522a/ActualValues",
+  "State": "NotOk",
+  "Changes": [],
+  "ResponseMetadata": {
+    "Version": "v4",
+    "GetsDeprecated": false,
+    "Errors": []
+  }
+}
