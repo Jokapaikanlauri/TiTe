@@ -11,6 +11,8 @@ namespace WeldingDataApplication.Pages
         public List<WeldDetails.WeldData>? rootList;
         public WeldDetails.Root rootElement;
         private readonly ILogger<IndexModel> _logger;
+        private string apiKey = "?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1";
+       
 
         public IndexModel(ILogger<IndexModel> logger)
         {
@@ -24,19 +26,24 @@ namespace WeldingDataApplication.Pages
             Message = await myHttpClient.GetFromJsonAsync<Weld.Root>("http://weldcube.ky.local/api/v4/Welds?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1%20");
             foreach(Weld.WeldInfo item in Message.WeldInfos)
             {
-                var url = item.Details;              
-                rootElement = await myHttpClient.GetFromJsonAsync<WeldDetails.Root>(url);
+
+                var url = item.Details;
+                url += apiKey;
+                Console.WriteLine("Olen url "+ url);
+               var rootWanted = await myHttpClient.GetFromJsonAsync<WeldDetails.Root>(url.ToString());
+
                 rootList.Add(rootElement.WeldData);
                 Thread.Sleep(1000);
 
                 foreach(WeldDetails.WeldData paska in rootList)
                 {
-                    foreach(WeldDetails.LimitViolation kusi in paska.LimitViolations)
-                    {
+                    Console.WriteLine(paska);
+                    //foreach(WeldDetails.LimitViolation kusi in paska.LimitViolations)
+                    //{
 
-                        Console.WriteLine("ERROR: " + kusi.ValueType + " AND" + kusi.ViolationType);
+                    //    Console.WriteLine("ERROR: " + kusi.ValueType + " AND" + kusi.ViolationType);
 
-                    }
+                    //}
                 }
             }
             
