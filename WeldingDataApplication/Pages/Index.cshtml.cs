@@ -8,7 +8,7 @@ namespace WeldingDataApplication.Pages
     {
         static HttpClient myHttpClient = new HttpClient();
         public Weld.Root? Message;
-        public List<WeldDetails.Root>? rootList;
+        public List<WeldDetails.WeldData>? rootList;
         public WeldDetails.Root rootElement;
         private readonly ILogger<IndexModel> _logger;
 
@@ -26,8 +26,18 @@ namespace WeldingDataApplication.Pages
             {
                 var url = item.Details;              
                 rootElement = await myHttpClient.GetFromJsonAsync<WeldDetails.Root>(url);
-                rootList.Add(rootElement);
+                rootList.Add(rootElement.WeldData);
                 Thread.Sleep(1000);
+
+                foreach(WeldDetails.WeldData paska in rootList)
+                {
+                    foreach(WeldDetails.LimitViolation kusi in paska.LimitViolations)
+                    {
+
+                        Console.WriteLine("ERROR: " + kusi.ValueType + " AND" + kusi.ViolationType);
+
+                    }
+                }
             }
             
         }
