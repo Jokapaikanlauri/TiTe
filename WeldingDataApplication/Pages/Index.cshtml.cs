@@ -7,7 +7,7 @@ namespace WeldingDataApplication.Pages
     public class IndexModel : PageModel
     {
         static HttpClient myHttpClient = new HttpClient();
-        public List<Weld>? Message;
+        public List<Weld.WeldInfo>? Message;
         private readonly ILogger<IndexModel> _logger;
 
         public IndexModel(ILogger<IndexModel> logger)
@@ -17,7 +17,7 @@ namespace WeldingDataApplication.Pages
 
         public async Task OnGetAsync()
         {
-            Message = await myHttpClient.GetFromJsonAsync<List<Weld>>("http://weldcube.ky.local/api/v4/Welds?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1%20");
+            Message = await myHttpClient.GetFromJsonAsync<List<Weld.WeldInfo>>("http://weldcube.ky.local/api/v4/Welds?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1%20");
         }
 
         public void OnGet()
