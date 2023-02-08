@@ -5,9 +5,9 @@
 }
 
 <ul>
-    @foreach (var item in Model.Message)
+    @foreach(var item in @Model.Message.WeldInfos)
     {
-        <li>@item.Welder</li>
+
     }
 </ul>
 <div class="info">
