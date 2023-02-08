@@ -4,7 +4,12 @@
     ViewData["Title"] = "Home page";
 }
 
-
+<ul>
+    @foreach (var item in Model.Message)
+    {
+        <li>@item.ToString()</li>
+    }
+</ul>
 <div class="info">
     <div class="otsikko">Section 1</div>
 <div class="grid">

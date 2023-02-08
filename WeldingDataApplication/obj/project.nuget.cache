@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "8DElnT9/l+AC9IgxwA4OGs+54nlBje7QdOq4R36Q5dZ5nZ4JDzoxreHUC0SegaKILlMsFKRoYNRwvb8zDCgklg==",
+  "dgSpecHash": "H6VI6X6aNytKYY+a5CpRE6OjwhDAJ05jJuGP5pbiGIg+AivUTxY8VVLeAuLRgRIfTF7CGMaV1/dvQczz4v7tPA==",
   "success": true,
-  "projectFilePath": "/Users/villeniskanen/Desktop/Tietotekniikkaproj/group-1/WeldingDataApplication/WeldingDataApplication.csproj",
+  "projectFilePath": "C:\\Users\\halon\\Source\\Repos\\group-1\\WeldingDataApplication\\WeldingDataApplication.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

@@ -1,30 +1,45 @@
 ﻿using System;
 namespace WeldingDataApplication.Classes
 {
-   /* public class Weld
+    public class Weld
     {
         public Weld()
         {
-            private int Id { get; set; }
-            private DateTime Timestamp { get; set; }
-            private int ProcessingStepNumber { get; set; }
-            private int PartSerialNumber { get; set; }
-            private int PartArticleNumber { get; set; }
-            private string MachineType { get; set; }
-            private string MachineSerialNumber { get; set; }
-            private string Details { get; set; }
-            private string State { get; set; }
-            private string Welder { get; set; }
+            
 
         }
 
+        public class ResponseMetadata
+        {
+            public string Version { get; set; }
+            public bool GetsDeprecated { get; set; }
+            public List<object> Errors { get; set; }
+        }
 
-	}*/
+        public class Root
+        {
+            public List<WeldInfo> WeldInfos { get; set; }
+            public ResponseMetadata ResponseMetadata { get; set; }
+        }
 
-    /*
-     * Tuleeko tämän
-     
-     */
+        public class WeldInfo
+        {
+            public string Id { get; set; }
+            public DateTime Timestamp { get; set; }
+            public string ProcessingStepNumber { get; set; }
+            public string PartSerialNumber { get; set; }
+            public string PartArticleNumber { get; set; }
+            public string MachineType { get; set; }
+            public string MachineSerialNumber { get; set; }
+            public string Details { get; set; }
+            public string State { get; set; }
+            public string Welder { get; set; }
+        }
+
+    }
+
+
+
 
 
 }
