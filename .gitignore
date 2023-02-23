@@ -1,6 +1,7 @@
 # Ignore any files in /bin and /obj Folders
-**/bin/*
-**/obj/*
+WeldingDataApplication/bin/
+WeldingDataApplication/obj/
+WeldingDataApplication/.vs/
 **/.vs/*
 /WeldingDataApplication/obj
 /WeldingDataApplication/bin
