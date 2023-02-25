@@ -48,7 +48,7 @@ namespace WeldingDataApplication.Pages
 
                 //Viesti, tehdäänkä html elementtinä, vaiko vain viestinä???
                 //message.IsBodyHtml = true;
-                //message.Body = "<h1>Tämä on HTML-otsikko</h1><p>Tämä on HTML-tekstiä</p>";
+                //message.Body = "<h1>Tapahtui virhe</h1><p>TÄHÄN VIESTI</p>";
                 message.Body = "Tapahtui virhe: " + "TÄHÄN VIESTI";
 
                 // SMTP asetukset. Loin Gmailiin postilaatikon. Tosi turvallista tämmönen kovakoodaus :D mutta koska Savonia.
