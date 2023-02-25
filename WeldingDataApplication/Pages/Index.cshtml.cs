@@ -36,9 +36,11 @@ namespace WeldingDataApplication.Pages
                 // Luodaan sähköpostiviesti. Päätetään myöhemmin millainen rakenne.
                 var message = new MailMessage();
 
-                //Sebastian työnjohtajana ottaa vastaan mailit :DDD
-
+                //Valitaan vastaanottajat
+                message.To.Add(new MailAddress("Simo.Hamalainen@edu.savonia.fi"));
                 message.To.Add(new MailAddress("Sebastian.Halonen@edu.savonia.fi"));
+                message.To.Add(new MailAddress("Lauri.Hartikainen@edu.savonia.fi"));
+                message.To.Add(new MailAddress("Ville.Niskanen@edu.savonia.fi"));
                 //message.To.Add(new MailAddress("mikko.paakkonen@savonia.fi"));
 
                 //Viestin otsikko
