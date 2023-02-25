@@ -75,6 +75,7 @@ namespace WeldingDataApplication.Pages
         {
             try
             {
+                //Etisivulla oleva otsikko kertoo, ollaanko savoniassa vai kotona.
                 verkko = "Savonian verkossa";
 
                 // Muutetaan haettu json fomraatttin
@@ -137,9 +138,10 @@ namespace WeldingDataApplication.Pages
             }
             catch (Exception e)
             {
+                //Etisivulla oleva otsikko kertoo, ollaanko savoniassa vai kotona.
                 verkko = "Yhteys Savoniaan ei onnistu...";
                 _logger.LogError("Ei yhteyttä savonian verkkoon: " + e);
-                Console.WriteLine("EI YHTEYTTÄ SAVONIAAN");
+                //Console.WriteLine("EI YHTEYTTÄ SAVONIAAN");
             }
         }
 
