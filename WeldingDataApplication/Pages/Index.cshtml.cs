@@ -13,6 +13,7 @@ namespace WeldingDataApplication.Pages
         public WeldDetails.RootObject rootElement;
         private readonly ILogger<IndexModel> _logger;
         private string apiKey = "?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1";
+
         public string verkko = "";
 
 
@@ -31,48 +32,57 @@ namespace WeldingDataApplication.Pages
             object WeldinError = null;
 
             //Jos 
-            if (WeldinError != null)
+            if (WeldinError == null)
             {
                 // Luodaan sähköpostiviesti. Päätetään myöhemmin millainen rakenne.
                 var message = new MailMessage();
 
                 //Valitaan vastaanottajat
-                message.To.Add(new MailAddress("Simo.Hamalainen@edu.savonia.fi"));
-                message.To.Add(new MailAddress("Sebastian.Halonen@edu.savonia.fi"));
-                message.To.Add(new MailAddress("Lauri.Hartikainen@edu.savonia.fi"));
-                message.To.Add(new MailAddress("Ville.Niskanen@edu.savonia.fi"));
+                message.To.Add(new MailAddress("simo.hamalainen@edu.savonia.fi"));
+                //Valitaan lähettäjä
+                message.From = new MailAddress("savoniankumipojat@gmail.com");
                 //message.To.Add(new MailAddress("mikko.paakkonen@savonia.fi"));
 
                 //Viestin otsikko
-                message.Subject = "Hirhehitsauksessa: " + "TÄHÄN TIETO VÄLITETYSTÄ MUUTUJASTA";
+                message.Subject = "Virhehitsauksessa: " + "TÄHÄN TIETO VÄLITETYSTÄ MUUTUJASTA";
 
                 //Viesti, tehdäänkä html elementtinä, vaiko vain viestinä???
+
                 //message.IsBodyHtml = true;
                 //message.Body = "<h1>Tapahtui virhe</h1><p>TÄHÄN VIESTI</p>";
+
                 message.Body = "Tapahtui virhe: " + "TÄHÄN VIESTI";
 
-                // SMTP asetukset. Loin Gmailiin postilaatikon. Tosi turvallista tämmönen kovakoodaus :D mutta koska Savonia.
-                var smtpClient = new SmtpClient("smtp.gmail.com", 587);
-                smtpClient.UseDefaultCredentials = false;
-                smtpClient.Credentials = new NetworkCredential("savoniankumipojat@gmail.com", "Salasana12345");
-                smtpClient.EnableSsl = true;
+
+
+
 
                 try
                 {
+                    // SMTP asetukset. Loin Gmailiin postilaatikon. Tosi turvallista tämmönen kovakoodaus :D mutta koska Savonia.
+                    var smtpClient = new SmtpClient("smtp.gmail.com", 587);
+
+
+                    smtpClient.EnableSsl = true;
+                    smtpClient.UseDefaultCredentials = false;
+                    smtpClient.Credentials = new NetworkCredential("savoniankumipojat@gmail.com", "Salasana12345");
                     // Lähetetään sähköpostiviesti, jos luoja suo
                     smtpClient.Send(message);
                 }
                 catch (Exception ex)
                 {
+                    verkko = "SÖPÖ LÄHETETTY EPÄONNISTUNEESTI";
                     //Jos lähettäminen ei onnistu, niin logataan se
                     //Console.WriteLine("Lähetys epäonnistui: " + message);
                     _logger.LogError(ex, "Sähköpostin lähettäminen epäonnistui: " + message);
+                    Console.WriteLine(ex.ToString() + " " + message);
                 }
             }
         }
 
         public async Task OnGet()
         {
+            ErrorMessage();
             try
             {
                 //Etisivulla oleva otsikko kertoo, ollaanko savoniassa vai kotona.
@@ -140,8 +150,9 @@ namespace WeldingDataApplication.Pages
             {
                 //Etisivulla oleva otsikko kertoo, ollaanko savoniassa vai kotona.
                 verkko = "Yhteys Savoniaan ei onnistu...";
-                _logger.LogError("Ei yhteyttä savonian verkkoon: " + e);
+                //_logger.LogError("Ei yhteyttä savonian verkkoon: " + e);
                 //Console.WriteLine("EI YHTEYTTÄ SAVONIAAN");
+                ErrorMessage();
             }
         }
 
