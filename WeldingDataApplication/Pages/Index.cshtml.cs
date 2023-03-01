@@ -15,8 +15,9 @@ namespace WeldingDataApplication.Pages
         private string apiKey = "?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1";
 
         //lokitiedot
-        DateTime localDate = DateTime.Now;
-        public List<string> lokikirja = new List<string>();
+        DateTime time = DateTime.Now;
+        public List<string> errorloki = new List<string>();
+        public List<string> onnistumisloki = new List<string>();
 
 
         public IndexModel(ILogger<IndexModel> logger)
@@ -27,6 +28,7 @@ namespace WeldingDataApplication.Pages
         //Sähköpostin lähetyksenkoodi, ei vielä testattu. Koitan kommentoida jotta muistaa jatkossa mitä on ajatellu
         public async Task ErrorMessage()
         {
+            onnistumisloki.Add("Sähköpostin lähetys aloitettu");
             //tätä funktiota kutsutaan kun eri funktiossa, fetsauksen jälkeen tälle funktiolla välitetään haettu tieto, ja tarkistellaan 
             //onko error tapahtunut. Lisätään vastaan otettava OBJEKTI myöhemmin, tai muokataan koodia, ottamaan vastaan muuttuja.
 
@@ -38,21 +40,13 @@ namespace WeldingDataApplication.Pages
             {
                 // Luodaan sähköpostiviesti. Päätetään myöhemmin millainen rakenne.
                 var message = new MailMessage();
-
                 //Valitaan vastaanottajat
                 message.To.Add(new MailAddress("simo.hamalainen@edu.savonia.fi"));
                 //Valitaan lähettäjä
                 message.From = new MailAddress("savoniankumipojat@gmail.com");
-                //message.To.Add(new MailAddress("mikko.paakkonen@savonia.fi"));
-
                 //Viestin otsikko
                 message.Subject = "Virhehitsauksessa: " + "TÄHÄN TIETO VÄLITETYSTÄ MUUTUJASTA";
-
-                //Viesti, tehdäänkä html elementtinä, vaiko vain viestinä???
-
-                //message.IsBodyHtml = true;
-                //message.Body = "<h1>Tapahtui virhe</h1><p>TÄHÄN VIESTI</p>";
-
+                //Viesti, tehdäänkä html elementtinä, vaiko vain viestinä???                          
                 message.Body = "Tapahtui virhe: " + "TÄHÄN VIESTI";
 
 
@@ -63,22 +57,17 @@ namespace WeldingDataApplication.Pages
                 {
                     // SMTP asetukset. Loin Gmailiin postilaatikon. Tosi turvallista tämmönen kovakoodaus :D mutta koska Savonia.
                     var smtpClient = new SmtpClient("smtp.gmail.com", 587);
-
-
                     smtpClient.EnableSsl = true;
                     smtpClient.UseDefaultCredentials = false;
                     smtpClient.Credentials = new NetworkCredential("savoniankumipojat@gmail.com", "Salasana12345");
                     // Lähetetään sähköpostiviesti, jos luoja suo
                     smtpClient.Send(message);
-                    lokikirja.Add(localDate + ": Lähetetään virheilmoitus sähköpostilla");
+                    onnistumisloki.Add("Lähetetään virheilmoitus sähköpostilla: " + message);
                 }
                 catch (Exception ex)
                 {
-                    lokikirja.Add(localDate + ": Sähköpostipalvelin ei vastaa");
-                    //Jos lähettäminen ei onnistu, niin logataan se
-                    //Console.WriteLine("Lähetys epäonnistui: " + message);
-                    _logger.LogError(ex, "Sähköpostin lähettäminen epäonnistui: " + message);
-                    lokikirja.Add(localDate + ": " + ex.ToString() + " " + message);
+                    errorloki.Add("Sähköpostipalvelin ei vastaa: " + ex);
+                    errorloki.Add("Sähköpostin lähettäminen epäonnistui: " + message);
 
                 }
             }
@@ -86,12 +75,12 @@ namespace WeldingDataApplication.Pages
 
         public async Task OnGet()
         {
-
+            onnistumisloki.Add("Ohjelma käynnistyi");
             try
             {
                 //Etisivulla oleva otsikko kertoo, ollaanko savoniassa vai kotona.
 
-                lokikirja.Add(localDate + ": Yhdistetään Savonian verkoon");
+                //errorloki.Add(localDate + ": Yhdistetään Savonian verkoon");
                 // Muutetaan haettu json fomraatttin
                 myHttpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                 //Message = await myHttpClient.GetFromJsonAsync<List<Weld.WeldInfo>>("http://weldcube.ky.local/api/v4/Welds?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1%20");
@@ -101,7 +90,7 @@ namespace WeldingDataApplication.Pages
                 Message = await myHttpClient.GetFromJsonAsync<Weld.Root>("http://weldcube.ky.local/api/v4/Welds?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1%20");
                 //Message = await myHttpClient.GetFromJsonAsync<Weld.Root>("http://weldcube.ky.local/api/v4/Welds?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1");
                 Console.WriteLine("Olen Message " + Message);
-                lokikirja.Add(localDate + ": " + Message.ToString());
+
 
                 // Alotetaan looppaamaan kaikki hitsaukset
                 foreach (Weld.WeldInfo item in Message.WeldInfos)
@@ -127,16 +116,7 @@ namespace WeldingDataApplication.Pages
                     Console.WriteLine("");
 
                     //Frontendin lokit.
-                    lokikirja.Add($"{localDate}: Message limitviolation: {Message}");
-                    lokikirja.Add($"{localDate}: Welder: {item.Welder}");
-                    lokikirja.Add($"{localDate}: Timestamp: {item.Timestamp}");
-                    lokikirja.Add($"{localDate}: Id: {item.Id}");
-                    lokikirja.Add($"{localDate}: State: {item.State}");
-                    lokikirja.Add($"{localDate}: ProcessingStepNumber: {item.ProcessingStepNumber}");
-                    lokikirja.Add($"{localDate}: MachineSerialNumber: {item.MachineSerialNumber}");
-                    lokikirja.Add($"{localDate}: PartSerialNumber: {item.PartSerialNumber}");
-                    lokikirja.Add($"{localDate}: MachineType: {item.MachineType}");
-                    lokikirja.Add($"{localDate}: Details: {item.Details}");
+
 
 
 
@@ -156,7 +136,7 @@ namespace WeldingDataApplication.Pages
                     //    //foreach (WeldDetails.LimitViolation kusi in paska.LimitViolations)
                     //    //{
 
-                    //    //    Console.WriteLine("ERROR: " + kusi.ValueType + " AND" + kusi.ViolationType);
+                    //    //    Console.WriteLine("" + kusi.ValueType + " AND" + kusi.ViolationType);
 
                     //    //}
                     //}
@@ -165,11 +145,7 @@ namespace WeldingDataApplication.Pages
             }
             catch (Exception e)
             {
-                //Etisivulla oleva otsikko kertoo, ollaanko savoniassa vai kotona.
-                lokikirja.Add(localDate + ": Weldcube ei vastaa");
-
-                //_logger.LogError("Ei yhteyttä savonian verkkoon: " + e);
-                lokikirja.Add(localDate + ": Yhteys Savoniaan ei onnistu");
+                errorloki.Add("Yhteys Savoniaan ei onnistu: " + e);
                 ErrorMessage();
             }
         }

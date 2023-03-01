@@ -3,15 +3,24 @@
 @{
     ViewData["Title"] = "root@weldcube: ~";
 }
-<style>
+<div class="cmd">
+    <h1>ONNISTUMISLOG</h1>
+@foreach (var item in Model.onnistumisloki)
+{
  
-</style>
-<div id="cmd">
+        <p class="onnistui">@item</p>
     
-    @foreach (var item in Model.lokikirja)
+}
+ </div>
+
+<div class="cmd">
+    <h1 >ERRORLOG</h1>
+    @foreach (var item in Model.errorloki)
     {
-        <p>@item</p>
+    
+        <p class="error">@item</p>
+    
     }
-    <p>root@weldcube:~# </p>
-</div>
+    </div>
+
 

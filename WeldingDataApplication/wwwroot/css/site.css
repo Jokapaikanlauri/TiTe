@@ -1,151 +1,59 @@
 body {
-    background-color: black;
+    background-color: #2e323a;
     font-family: Consolas, monospace;
-    font-size: 18px;
-    color: white;
-    margin: 0;
-    padding: 0;
+    margin:25px;
 }
-
 
 p {
-    margin-left: 1em;
-    color: #0f0;
+ 
+    font-size: 16px;     
 }
-
-#cmd {
-    position: absolute;
-    left: 0;
-    left: 0;
-    width: 100%;
-  
-  
-    background-color: #000;
-    padding-left: 1em;
+.error {
+    color: #e06057;
 }
-
-    #cmd p {
-        margin: 10px;
-    }
-
-        #cmd p:last-child::before {
-           
-            color: #0f0;
-            margin-right: 0.5em;
-        }
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    height: 150px;
-    background-color: #3d3c3e;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    border-bottom: 5px solid red;
-    display: flex;
-    align-items: center;
-}
-
-img{
-    padding-left:15px;
-}
-.navigation {
-    width: 15%;
-    float: left;
-    top: 0;
-    bottom: 0;
-    height: 200px;
-    height: calc(100vh - 150px);
-    background-color: #efefef;
-    padding-right: 10px;
-    border-right: 5px solid white;
-}
-
-.navigationlink {
-    width: 104%;
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-    .navigationlink:active {
-        background-color: #8397b5;
-        color: white;
-    }
-
-.mainbody {
-    width: 85%;
-    float: right;
-    height: calc(100vh - 150px);
-    overflow-y: auto;
-    padding-left: 5%;
-}
-
-.content {
-    margin-top: 150px;
-    bottom: 0;
-}
-
-.info {
-    min-height: 300px;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    background-color: #ffffff;
-    margin-bottom: 5px;
-    border-top: 2px solid green;
-    border-bottom: 2px solid orange;
-    width: 90%;
-}
-
-
-.nav-item {
+.error::before {
+    content: "";
+    background-image: url('/images/error.png');
+    background-repeat: no-repeat;
     display: inline-block;
-    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+.onnistui {
+    color: #81bf71;
 }
 
-.grid {
-    border: 2px solid grey;
+.onnistui::before {
+    content: "";
+    background-image: url('/images/success.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+.cmd {
+    margin-top: 10px;
+    padding: 25px;
+    background-color: #282c34;
     border-radius: 25px;
-    padding: 50px;
-    display: grid;
-    grid-template-areas:
-        "otsikko otsikko otsikko otsikko"
-        "one one two two"
-        "three three three three";
-    gap: 10px;
-    min-width: 300px;
-    margin: 36px;
+    border: 5px solid #e2e2e2;
+    word-wrap: break-word;
 }
 
-.otsikko {
-    margin-left: 20px;
-    display: grid;
-    font: bold x-large ariel;
-}
 
-.grid :hover {
-    background-color: lightgrey;
-}
 
-.grid > * {
-    
-    text-align: center;
-    border-radius: 5px;
-    padding-top: 15px;
-}
 
-.one {
 
-    grid-area: one;
-}
 
-.two {
-    grid-area: two;
-}
 
-.three {
-    grid-area: three;
-}
+
+
+
+
+
+
+
