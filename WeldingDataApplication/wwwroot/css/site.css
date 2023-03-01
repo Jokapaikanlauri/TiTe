@@ -3,8 +3,9 @@ body {
     font-family: Consolas, monospace;
     margin: 25px;
 }
-h1{
-    text-transform:uppercase;
+h1 {
+    text-transform: uppercase;
+    font-family: Georgia, serif;
 }
 h5 {
     text-align: center;
