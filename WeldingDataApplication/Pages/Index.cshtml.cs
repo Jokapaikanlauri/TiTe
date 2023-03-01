@@ -70,15 +70,15 @@ namespace WeldingDataApplication.Pages
                     smtpClient.Credentials = new NetworkCredential("savoniankumipojat@gmail.com", "Salasana12345");
                     // Lähetetään sähköpostiviesti, jos luoja suo
                     smtpClient.Send(message);
-                    lokikirja.Add(localDate.ToString() + " Lähetetään virheilmoitus sähköpostilla");
+                    lokikirja.Add(localDate + ": Lähetetään virheilmoitus sähköpostilla");
                 }
                 catch (Exception ex)
                 {
-                    lokikirja.Add(localDate.ToString() + " " + "Sähköpostipalvelin ei vastaa");
+                    lokikirja.Add(localDate + ": Sähköpostipalvelin ei vastaa");
                     //Jos lähettäminen ei onnistu, niin logataan se
                     //Console.WriteLine("Lähetys epäonnistui: " + message);
                     _logger.LogError(ex, "Sähköpostin lähettäminen epäonnistui: " + message);
-                    lokikirja.Add(localDate.ToString() + " " + ex.ToString() + " " + message);
+                    lokikirja.Add(localDate + ": " + ex.ToString() + " " + message);
 
                 }
             }
@@ -91,7 +91,7 @@ namespace WeldingDataApplication.Pages
             {
                 //Etisivulla oleva otsikko kertoo, ollaanko savoniassa vai kotona.
 
-                lokikirja.Add(localDate.ToString() + " " + "yhdistetään Savonian verkoon");
+                lokikirja.Add(localDate + ": Yhdistetään Savonian verkoon");
                 // Muutetaan haettu json fomraatttin
                 myHttpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                 //Message = await myHttpClient.GetFromJsonAsync<List<Weld.WeldInfo>>("http://weldcube.ky.local/api/v4/Welds?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1%20");
@@ -101,7 +101,7 @@ namespace WeldingDataApplication.Pages
                 Message = await myHttpClient.GetFromJsonAsync<Weld.Root>("http://weldcube.ky.local/api/v4/Welds?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1%20");
                 //Message = await myHttpClient.GetFromJsonAsync<Weld.Root>("http://weldcube.ky.local/api/v4/Welds?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1");
                 Console.WriteLine("Olen Message " + Message);
-                lokikirja.Add(localDate.ToString() + " " + Message.ToString());
+                lokikirja.Add(localDate + ": " + Message.ToString());
 
                 // Alotetaan looppaamaan kaikki hitsaukset
                 foreach (Weld.WeldInfo item in Message.WeldInfos)
@@ -125,6 +125,19 @@ namespace WeldingDataApplication.Pages
                     Console.WriteLine("Welder: " + item.Welder);
                     Console.WriteLine("Timestamp: " + item.Timestamp);
                     Console.WriteLine("");
+
+                    //Frontendin lokit.
+                    lokikirja.Add($"{localDate}: Message limitviolation: {Message}");
+                    lokikirja.Add($"{localDate}: Welder: {item.Welder}");
+                    lokikirja.Add($"{localDate}: Timestamp: {item.Timestamp}");
+                    lokikirja.Add($"{localDate}: Id: {item.Id}");
+                    lokikirja.Add($"{localDate}: State: {item.State}");
+                    lokikirja.Add($"{localDate}: ProcessingStepNumber: {item.ProcessingStepNumber}");
+                    lokikirja.Add($"{localDate}: MachineSerialNumber: {item.MachineSerialNumber}");
+                    lokikirja.Add($"{localDate}: PartSerialNumber: {item.PartSerialNumber}");
+                    lokikirja.Add($"{localDate}: MachineType: {item.MachineType}");
+                    lokikirja.Add($"{localDate}: Details: {item.Details}");
+
 
 
                     // Pitäisi saada gitsaus objecti ulo ,että voidaan eritellä haluamat tiedot.
@@ -153,10 +166,10 @@ namespace WeldingDataApplication.Pages
             catch (Exception e)
             {
                 //Etisivulla oleva otsikko kertoo, ollaanko savoniassa vai kotona.
-                lokikirja.Add(localDate.ToString() + " " + "Weldcube ei vastaa");
+                lokikirja.Add(localDate + ": Weldcube ei vastaa");
 
                 //_logger.LogError("Ei yhteyttä savonian verkkoon: " + e);
-                lokikirja.Add(localDate.ToString() + " " + "Yhteys Savoniaan ei onnistu");
+                lokikirja.Add(localDate + ": Yhteys Savoniaan ei onnistu");
                 ErrorMessage();
             }
         }
