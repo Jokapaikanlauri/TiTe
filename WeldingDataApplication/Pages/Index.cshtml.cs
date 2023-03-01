@@ -71,7 +71,7 @@ namespace WeldingDataApplication.Pages
                 }
                 catch (Exception ex)
                 {
-                    verkko = "SÖPÖ LÄHETETTY EPÄONNISTUNEESTI";
+                    verkko = "Sähköpostipalvlein ei vastaa";
                     //Jos lähettäminen ei onnistu, niin logataan se
                     //Console.WriteLine("Lähetys epäonnistui: " + message);
                     _logger.LogError(ex, "Sähköpostin lähettäminen epäonnistui: " + message);
