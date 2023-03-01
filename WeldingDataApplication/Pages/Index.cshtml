@@ -1,26 +1,29 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "root@weldcube: ~";
+    ViewData["Title"] = "Savoni x Weldcube";
 }
-<div class="cmd">
-    <h1>ONNISTUMISLOG</h1>
-@foreach (var item in Model.onnistumisloki)
-{
- 
-        <p class="onnistui">@item</p>
-    
-}
- </div>
+<div class="container">
+    <div class="cmd">
+        <h1>success</h1>
+        @foreach (var item in Model.onnistumisloki)
+        {
 
-<div class="cmd">
-    <h1 >ERRORLOG</h1>
-    @foreach (var item in Model.errorloki)
-    {
-    
-        <p class="error">@item</p>
-    
-    }
+            <p class="onnistui">@item</p>
+
+        }
     </div>
+
+    <div class="cmd">
+        <h1>error</h1>
+        @foreach (var item in Model.errorloki)
+        {
+
+            <p class="error">@item</p>
+
+        }
+    </div>
+</div>
+<h5>© Savonian Kumipojat 2023</h5>
 
 

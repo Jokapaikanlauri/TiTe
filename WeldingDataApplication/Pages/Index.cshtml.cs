@@ -15,7 +15,7 @@ namespace WeldingDataApplication.Pages
         private string apiKey = "?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1";
 
         //lokitiedot
-        DateTime time = DateTime.Now;
+        DateTime aika = DateTime.Now;
         public List<string> errorloki = new List<string>();
         public List<string> onnistumisloki = new List<string>();
 
@@ -28,7 +28,7 @@ namespace WeldingDataApplication.Pages
         //Sähköpostin lähetyksenkoodi, ei vielä testattu. Koitan kommentoida jotta muistaa jatkossa mitä on ajatellu
         public async Task ErrorMessage()
         {
-            onnistumisloki.Add("Sähköpostin lähetys aloitettu");
+            //onnistumisloki.Add("Sähköpostin lähetys aloitettu");
             //tätä funktiota kutsutaan kun eri funktiossa, fetsauksen jälkeen tälle funktiolla välitetään haettu tieto, ja tarkistellaan 
             //onko error tapahtunut. Lisätään vastaan otettava OBJEKTI myöhemmin, tai muokataan koodia, ottamaan vastaan muuttuja.
 
@@ -62,12 +62,12 @@ namespace WeldingDataApplication.Pages
                     smtpClient.Credentials = new NetworkCredential("savoniankumipojat@gmail.com", "Salasana12345");
                     // Lähetetään sähköpostiviesti, jos luoja suo
                     smtpClient.Send(message);
-                    onnistumisloki.Add("Lähetetään virheilmoitus sähköpostilla: " + message);
+                    onnistumisloki.Add(aika + " :Lähetetään virheilmoitus sähköpostilla: " + message);
                 }
                 catch (Exception ex)
                 {
-                    errorloki.Add("Sähköpostipalvelin ei vastaa: " + ex);
-                    errorloki.Add("Sähköpostin lähettäminen epäonnistui: " + message);
+                    errorloki.Add(aika + ": Sähköpostipalvelin ei vastaa: " + ex);
+                    errorloki.Add(aika + ": Sähköpostin lähettäminen epäonnistui: " + message);
 
                 }
             }
@@ -75,7 +75,7 @@ namespace WeldingDataApplication.Pages
 
         public async Task OnGet()
         {
-            onnistumisloki.Add("Ohjelma käynnistyi");
+            onnistumisloki.Add(aika + ": Ohjelma käynnistyi");
             try
             {
                 //Etisivulla oleva otsikko kertoo, ollaanko savoniassa vai kotona.
@@ -145,7 +145,7 @@ namespace WeldingDataApplication.Pages
             }
             catch (Exception e)
             {
-                errorloki.Add("Yhteys Savoniaan ei onnistu: " + e);
+                errorloki.Add(aika + ": Yhteys Savoniaan ei onnistu: " + e);
                 ErrorMessage();
             }
         }

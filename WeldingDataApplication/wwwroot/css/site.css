@@ -1,9 +1,18 @@
 body {
-    background-color: #2e323a;
+    background-color: #2f3e46;
     font-family: Consolas, monospace;
-    margin:25px;
+    margin: 25px;
 }
-
+h1{
+    text-transform:uppercase;
+}
+h5 {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
 p {
  
     font-size: 16px;     
@@ -35,15 +44,20 @@ p {
     margin-right: 10px;
     vertical-align: middle;
 }
+.container {
+/*    display: flex;*/
+}
 .cmd {
-    margin-top: 10px;
+    margin: 25px;
     padding: 25px;
-    background-color: #282c34;
+    background-color: #354f52;
     border-radius: 25px;
     border: 5px solid #e2e2e2;
     word-wrap: break-word;
+/*   float: left;*/
+  width: 100%;
+    margin-right: 5%;
 }
-
 
 
 
