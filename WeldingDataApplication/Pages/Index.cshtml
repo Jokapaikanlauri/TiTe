@@ -1,21 +1,15 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "SAVONIAN KUMIPOJAT";
+    ViewData["Title"] = "root@weldcube: ~";
 }
 <style>
-    h1 {
-        text-align: center;
-        margin-top: 20vh;
-    }
+ 
 </style>
-<h1>@Model.verkko</h1>
+<div id="cmd">
+    
+    <p>@Model.verkko </p>
+    <p>@Model.smtppalvelin </p>
+    <p>root@weldcube:~# </p>
+</div>
 
-
-
-@*<ul>
-    @foreach(var item in @Model.Message.WeldInfos)
-    {
-        
-    }
-</ul>*@

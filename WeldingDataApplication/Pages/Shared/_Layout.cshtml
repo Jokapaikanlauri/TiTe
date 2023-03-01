@@ -3,28 +3,19 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - WeldingDataApplication</title>
+    <title>@ViewData["Title"] </title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WeldingDataApplication.styles.css" asp-append-version="true" />
 </head>
 <body>
 <div class="parent">
-        <div class="header">
-            <img src="~/images/logo.png" alt="logo" style="height:100px;">    
-@*            <div class="nav-item" onclick="index()"><img src="~/images/home.png"></div>
-            <div class="nav-item" onclick="error()"><img src="~/images/error.png"></div>*@
-        </div>
+    
 
- <div class="content">
-    <div class="navigation">
- @*       <div class="navigationlink"><a href="#section1">Section 1</a></div>
-                <div class="navigationlink"><a href="#section2">Section 2</a></div>
-                <div class="navigationlink"><a href="#section3">Section 3</a></div>*@
-
-            </div>
-    <div class="mainbody">@RenderBody() </div>
+ 
+   
 </div>
+ <div >@RenderBody() </div>
 <script>
    function index() {
         window.location.href = '/';

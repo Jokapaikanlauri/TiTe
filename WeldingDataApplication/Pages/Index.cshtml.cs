@@ -15,7 +15,7 @@ namespace WeldingDataApplication.Pages
         private string apiKey = "?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1";
 
         public string verkko = "";
-
+        public string smtppalvelin = "";
 
         public IndexModel(ILogger<IndexModel> logger)
         {
@@ -71,7 +71,7 @@ namespace WeldingDataApplication.Pages
                 }
                 catch (Exception ex)
                 {
-                    verkko = "Sähköpostipalvlein ei vastaa";
+                    smtppalvelin = "Sähköpostipalvelin ei vastaa";
                     //Jos lähettäminen ei onnistu, niin logataan se
                     //Console.WriteLine("Lähetys epäonnistui: " + message);
                     _logger.LogError(ex, "Sähköpostin lähettäminen epäonnistui: " + message);
@@ -149,7 +149,7 @@ namespace WeldingDataApplication.Pages
             catch (Exception e)
             {
                 //Etisivulla oleva otsikko kertoo, ollaanko savoniassa vai kotona.
-                verkko = "Yhteys Savoniaan ei onnistu...";
+                verkko = "Weldcube ei vastaa";
                 //_logger.LogError("Ei yhteyttä savonian verkkoon: " + e);
                 //Console.WriteLine("EI YHTEYTTÄ SAVONIAAN");
                 ErrorMessage();

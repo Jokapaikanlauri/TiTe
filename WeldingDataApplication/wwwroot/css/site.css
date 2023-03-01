@@ -1,4 +1,38 @@
+body {
+    background-color: black;
+    font-family: Consolas, monospace;
+    font-size: 18px;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
 
+
+p {
+    margin-left: 1em;
+    color: #0f0;
+}
+
+#cmd {
+    position: absolute;
+    left: 0;
+    left: 0;
+    width: 100%;
+  
+  
+    background-color: #000;
+    padding-left: 1em;
+}
+
+    #cmd p {
+        margin: 10px;
+    }
+
+        #cmd p:last-child::before {
+           
+            color: #0f0;
+            margin-right: 0.5em;
+        }
 .header {
     position: fixed;
     top: 0;
@@ -13,7 +47,9 @@
     align-items: center;
 }
 
-
+img{
+    padding-left:15px;
+}
 .navigation {
     width: 15%;
     float: left;
