@@ -14,8 +14,10 @@ namespace WeldingDataApplication.Pages
         private readonly ILogger<IndexModel> _logger;
         private string apiKey = "?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1";
 
-        public string verkko = "";
-        public string smtppalvelin = "";
+        //lokitiedot
+        DateTime localDate = DateTime.Now;
+        public List<string> lokikirja = new List<string>();
+
 
         public IndexModel(ILogger<IndexModel> logger)
         {
@@ -68,26 +70,28 @@ namespace WeldingDataApplication.Pages
                     smtpClient.Credentials = new NetworkCredential("savoniankumipojat@gmail.com", "Salasana12345");
                     // Lähetetään sähköpostiviesti, jos luoja suo
                     smtpClient.Send(message);
+                    lokikirja.Add(localDate.ToString() + " Lähetetään virheilmoitus sähköpostilla");
                 }
                 catch (Exception ex)
                 {
-                    smtppalvelin = "Sähköpostipalvelin ei vastaa";
+                    lokikirja.Add(localDate.ToString() + " " + "Sähköpostipalvelin ei vastaa");
                     //Jos lähettäminen ei onnistu, niin logataan se
                     //Console.WriteLine("Lähetys epäonnistui: " + message);
                     _logger.LogError(ex, "Sähköpostin lähettäminen epäonnistui: " + message);
-                    Console.WriteLine(ex.ToString() + " " + message);
+                    lokikirja.Add(localDate.ToString() + " " + ex.ToString() + " " + message);
+
                 }
             }
         }
 
         public async Task OnGet()
         {
-            ErrorMessage();
+
             try
             {
                 //Etisivulla oleva otsikko kertoo, ollaanko savoniassa vai kotona.
-                verkko = "Savonian verkossa";
 
+                lokikirja.Add(localDate.ToString() + " " + "yhdistetään Savonian verkoon");
                 // Muutetaan haettu json fomraatttin
                 myHttpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
                 //Message = await myHttpClient.GetFromJsonAsync<List<Weld.WeldInfo>>("http://weldcube.ky.local/api/v4/Welds?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1%20");
@@ -97,7 +101,7 @@ namespace WeldingDataApplication.Pages
                 Message = await myHttpClient.GetFromJsonAsync<Weld.Root>("http://weldcube.ky.local/api/v4/Welds?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1%20");
                 //Message = await myHttpClient.GetFromJsonAsync<Weld.Root>("http://weldcube.ky.local/api/v4/Welds?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1");
                 Console.WriteLine("Olen Message " + Message);
-
+                lokikirja.Add(localDate.ToString() + " " + Message.ToString());
 
                 // Alotetaan looppaamaan kaikki hitsaukset
                 foreach (Weld.WeldInfo item in Message.WeldInfos)
@@ -149,9 +153,10 @@ namespace WeldingDataApplication.Pages
             catch (Exception e)
             {
                 //Etisivulla oleva otsikko kertoo, ollaanko savoniassa vai kotona.
-                verkko = "Weldcube ei vastaa";
+                lokikirja.Add(localDate.ToString() + " " + "Weldcube ei vastaa");
+
                 //_logger.LogError("Ei yhteyttä savonian verkkoon: " + e);
-                //Console.WriteLine("EI YHTEYTTÄ SAVONIAAN");
+                lokikirja.Add(localDate.ToString() + " " + "Yhteys Savoniaan ei onnistu");
                 ErrorMessage();
             }
         }

@@ -8,8 +8,10 @@
 </style>
 <div id="cmd">
     
-    <p>@Model.verkko </p>
-    <p>@Model.smtppalvelin </p>
+    @foreach (var item in Model.lokikirja)
+    {
+        <p>@item</p>
+    }
     <p>root@weldcube:~# </p>
 </div>
 
