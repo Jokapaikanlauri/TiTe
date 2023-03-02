@@ -95,7 +95,7 @@ namespace WeldingDataApplication.Pages
                 // Alotetaan looppaamaan kaikki hitsaukset
                 var i = 0;
                 var o = 0;
-                StreamWriter sw = new StreamWriter("/Users/villeniskanen/Desktop/Tietotekniikkaproj/group-1/WeldingDataApplication/AllWelds.txt");
+                StreamWriter sw = new StreamWriter("./WeldingDataApplication/AllWelds.txt");
     
 
                 foreach (Weld.WeldInfo item in Message.WeldInfos)
