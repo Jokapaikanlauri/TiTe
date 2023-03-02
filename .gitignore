@@ -6,4 +6,4 @@ WeldingDataApplication/.vs/
 /WeldingDataApplication/obj
 /WeldingDataApplication/bin
 /WeldingDataApplication/.vs
-/WeldingDataApplication/obj/Debug/net6.0/WeldingDataApplication.GeneratedMSBuildEditorConfig.editorconfig
+/WeldingDataApplication/obj/*
