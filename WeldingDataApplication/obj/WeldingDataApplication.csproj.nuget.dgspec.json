@@ -1,32 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Visual Studio Projektit\\Koulu\\Tietotekniikkaprojekti\\group-1\\WeldingDataApplication\\WeldingDataApplication.csproj": {}
+    "/Users/villeniskanen/Desktop/Tietotekniikkaproj/group-1/WeldingDataApplication/WeldingDataApplication.csproj": {}
   },
   "projects": {
-    "D:\\Visual Studio Projektit\\Koulu\\Tietotekniikkaprojekti\\group-1\\WeldingDataApplication\\WeldingDataApplication.csproj": {
+    "/Users/villeniskanen/Desktop/Tietotekniikkaproj/group-1/WeldingDataApplication/WeldingDataApplication.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Visual Studio Projektit\\Koulu\\Tietotekniikkaprojekti\\group-1\\WeldingDataApplication\\WeldingDataApplication.csproj",
+        "projectUniqueName": "/Users/villeniskanen/Desktop/Tietotekniikkaproj/group-1/WeldingDataApplication/WeldingDataApplication.csproj",
         "projectName": "WeldingDataApplication",
-        "projectPath": "D:\\Visual Studio Projektit\\Koulu\\Tietotekniikkaprojekti\\group-1\\WeldingDataApplication\\WeldingDataApplication.csproj",
-        "packagesPath": "C:\\Users\\unelm\\.nuget\\packages\\",
-        "outputPath": "D:\\Visual Studio Projektit\\Koulu\\Tietotekniikkaprojekti\\group-1\\WeldingDataApplication\\obj\\",
+        "projectPath": "/Users/villeniskanen/Desktop/Tietotekniikkaproj/group-1/WeldingDataApplication/WeldingDataApplication.csproj",
+        "packagesPath": "/Users/villeniskanen/.nuget/packages/",
+        "outputPath": "/Users/villeniskanen/Desktop/Tietotekniikkaproj/group-1/WeldingDataApplication/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\unelm\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/villeniskanen/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -63,7 +56,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.101/RuntimeIdentifierGraph.json"
         }
       }
     }

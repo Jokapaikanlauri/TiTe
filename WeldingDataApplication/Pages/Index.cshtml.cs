@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Mail;
 using WeldingDataApplication.Classes;
+using System.Xml.Serialization;
 
 namespace WeldingDataApplication.Pages
 {
@@ -76,8 +77,8 @@ namespace WeldingDataApplication.Pages
         public async Task OnGet()
         {
             onnistumisloki.Add(aika + ": Ohjelma käynnistyi");
-            try
-            {
+            //try
+            //{
                 //Etisivulla oleva otsikko kertoo, ollaanko savoniassa vai kotona.
 
                 //errorloki.Add(localDate + ": Yhdistetään Savonian verkoon");
@@ -97,23 +98,23 @@ namespace WeldingDataApplication.Pages
                 {
                     // Luodaan url + api key, että saadaan rajapinnan tieto ulos
 
-                    Console.WriteLine("");
+               
 
-                    Console.WriteLine("Id: " + item.Id);
-                    Console.WriteLine("State: " + item.State);
-                    Console.WriteLine("ProcessingStepNumber: " + item.ProcessingStepNumber);
-                    Console.WriteLine("MachineSerialNumber: " + item.MachineSerialNumber);
-                    Console.WriteLine("PartSerialNumber: " + item.PartSerialNumber);
-                    Console.WriteLine("MachineType: " + item.MachineType);
-                    Console.WriteLine("Details: " + item.Details);
+                    //Console.WriteLine("Id: " + item.Id);
+                    //Console.WriteLine("State: " + item.State);
+                    //Console.WriteLine("ProcessingStepNumber: " + item.ProcessingStepNumber);
+                    //Console.WriteLine("MachineSerialNumber: " + item.MachineSerialNumber);
+                    //Console.WriteLine("PartSerialNumber: " + item.PartSerialNumber);
+                    //Console.WriteLine("MachineType: " + item.MachineType);
+                    //Console.WriteLine("Details: " + item.Details);
                     var url = item.Details;
                     url += apiKey;
                     // rootList = await myHttpClient.GetFromJsonAsync<WeldDetails>(item.Details+apiKey);
-                    Console.WriteLine("Message limitviolation: " + Message);
+                    //Console.WriteLine("Url:  " + url);
 
-                    Console.WriteLine("Welder: " + item.Welder);
-                    Console.WriteLine("Timestamp: " + item.Timestamp);
-                    Console.WriteLine("");
+                    //Console.WriteLine("Welder: " + item.Welder);
+                    //Console.WriteLine("Timestamp: " + item.Timestamp);
+                    //Console.WriteLine("");
 
                     //Frontendin lokit.
 
@@ -121,33 +122,41 @@ namespace WeldingDataApplication.Pages
 
 
                     // Pitäisi saada gitsaus objecti ulo ,että voidaan eritellä haluamat tiedot.
-                    var rootWanted = await myHttpClient.GetFromJsonAsync<WeldDetails>(url);
-                    Console.WriteLine(rootWanted);
+                    var rootWanted = await myHttpClient.GetFromJsonAsync<WeldDetails.RootObject>(url);
+                    Console.WriteLine("Root: "+rootWanted);
 
-
-                    //Console.WriteLine(rootWanted);//vittu to string
-                    //rootList.Add();
-                    //Thread.Sleep(1000);
-
-                    // TÄ ÄEI VIELÄ TOIMI!
-                    //foreach (WeldDetails.WeldDataLimitViolation virhe in rootWanted)
-                    //{
-                    //    Console.WriteLine(virhe);
-                    //    //foreach (WeldDetails.LimitViolation kusi in paska.LimitViolations)
-                    //    //{
-
-                    //    //    Console.WriteLine("" + kusi.ValueType + " AND" + kusi.ViolationType);
-
-                    //    //}
-                    //}
+                foreach ( var violation in rootWanted.WeldData.LimitViolations )
+                {
+                    string valueType = violation.ValueType;
+                    string violationType = violation.ViolationType;
+                    Console.WriteLine("isällä");
+                    Console.WriteLine($"Value Type: {valueType}, Violation Type: {violationType}");
                 }
 
+
+                //Console.WriteLine(rootWanted);//vittu to string
+                //rootList.Add();
+                //Thread.Sleep(1000);
+
+                // TÄ ÄEI VIELÄ TOIMI!
+                //foreach (WeldDetails.WeldDataLimitViolation virhe in rootWanted)
+                //{
+                //    Console.WriteLine(virhe);
+                //    //foreach (WeldDetails.LimitViolation kusi in paska.LimitViolations)
+                //    //{
+
+                //    //    Console.WriteLine("" + kusi.ValueType + " AND" + kusi.ViolationType);
+
+                //    //}
+                //}
             }
-            catch (Exception e)
-            {
-                errorloki.Add(aika + ": Yhteys Savoniaan ei onnistu: " + e);
-                ErrorMessage();
-            }
+
+            //}
+            //catch (Exception e)
+            //{
+            //    errorloki.Add(aika + ": Yhteys Savoniaan ei onnistu: " + e);
+            //    ErrorMessage();
+            //}
         }
 
 

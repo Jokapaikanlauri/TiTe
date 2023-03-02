@@ -93,7 +93,7 @@
             public string Model { get; set; }
             public string Welder { get; set; }
             public DateTime TimeStamp { get; set; }
-            public int Duration { get; set; }
+            public double Duration { get; set; }
             public WeldData WeldData { get; set; }
             public List<Error> Errors { get; set; }
             public bool IsCompleted { get; set; }

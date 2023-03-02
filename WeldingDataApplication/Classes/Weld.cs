@@ -19,7 +19,7 @@ namespace WeldingDataApplication.Classes
         public class Root
         {
             public List<WeldInfo> WeldInfos { get; set; }
-            public ResponseMetadata ResponseMetadata { get; set; }
+            public ResponseMetadata ResponseMetadatas { get; set; }
         }
 
         public class WeldInfo
