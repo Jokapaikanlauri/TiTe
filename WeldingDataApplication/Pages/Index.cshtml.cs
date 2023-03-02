@@ -1,6 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Connections;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Net;
 using System.Net.Mail;
+using System.Text;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 using WeldingDataApplication.Classes;
 
 namespace WeldingDataApplication.Pages
@@ -14,11 +19,16 @@ namespace WeldingDataApplication.Pages
         private readonly ILogger<IndexModel> _logger;
         private string apiKey = "?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1";
 
+        
+        static string apiEndpoint = "https://api.courier.com/send";
+        static string token = "Bearer " + "dk_prod_0N0HT7KZK64JPHHD1CXY0PKQBF5K";
+
         //lokitiedot
         DateTime aika = DateTime.Now;
         public List<string> errorloki = new List<string>();
         public List<string> onnistumisloki = new List<string>();
 
+        public string sample = "tämä on testiteksti";
 
         public IndexModel(ILogger<IndexModel> logger)
         {
@@ -26,50 +36,28 @@ namespace WeldingDataApplication.Pages
         }
 
         //Sähköpostin lähetyksenkoodi, ei vielä testattu. Koitan kommentoida jotta muistaa jatkossa mitä on ajatellu
-        public async Task ErrorMessage()
+
+
+        public async Task sendEmail()
         {
-            //onnistumisloki.Add("Sähköpostin lähetys aloitettu");
-            //tätä funktiota kutsutaan kun eri funktiossa, fetsauksen jälkeen tälle funktiolla välitetään haettu tieto, ja tarkistellaan 
-            //onko error tapahtunut. Lisätään vastaan otettava OBJEKTI myöhemmin, tai muokataan koodia, ottamaan vastaan muuttuja.
+            try { 
+            _logger.LogError("sendemail alku");
+            // attach the Auth Token
+            myHttpClient.DefaultRequestHeaders.Add("Authorization", token);
 
-            //TÄMÄ POIS KUN NOUTOKOODAUS ON VALMIS.
-            object WeldinError = null;
+            // Data.variablesiin pitää viitata JSON-taulukon kautta jotta voidaan ilmoittaa muuttuja sähköpostitse
+            string payload =
+            "{ \"message\": {\"to\": {\"email\": \"savoniankumipojat@gmail.com\"},\"template\": \"BVEPX0PS6D4JK5G85C612850QTEB\", \"data\": {\"variables\":\"sample\"}}}";
 
-            //Jos 
-            if (WeldinError == null)
+
+            HttpContent content = new StringContent(payload, Encoding.UTF8, "application/json");
+
+            var resp = await myHttpClient.PostAsync(new Uri(apiEndpoint), content);
+            Console.WriteLine(resp);
+            }
+            catch (Exception e)
             {
-                // Luodaan sähköpostiviesti. Päätetään myöhemmin millainen rakenne.
-                var message = new MailMessage();
-                //Valitaan vastaanottajat
-                message.To.Add(new MailAddress("simo.hamalainen@edu.savonia.fi"));
-                //Valitaan lähettäjä
-                message.From = new MailAddress("savoniankumipojat@gmail.com");
-                //Viestin otsikko
-                message.Subject = "Virhehitsauksessa: " + "TÄHÄN TIETO VÄLITETYSTÄ MUUTUJASTA";
-                //Viesti, tehdäänkä html elementtinä, vaiko vain viestinä???                          
-                message.Body = "Tapahtui virhe: " + "TÄHÄN VIESTI";
-
-
-
-
-
-                try
-                {
-                    // SMTP asetukset. Loin Gmailiin postilaatikon. Tosi turvallista tämmönen kovakoodaus :D mutta koska Savonia.
-                    var smtpClient = new SmtpClient("smtp.gmail.com", 587);
-                    smtpClient.EnableSsl = true;
-                    smtpClient.UseDefaultCredentials = false;
-                    smtpClient.Credentials = new NetworkCredential("savoniankumipojat@gmail.com", "Salasana12345");
-                    // Lähetetään sähköpostiviesti, jos luoja suo
-                    smtpClient.Send(message);
-                    onnistumisloki.Add(aika + " :Lähetetään virheilmoitus sähköpostilla: " + message);
-                }
-                catch (Exception ex)
-                {
-                    errorloki.Add(aika + ": Sähköpostipalvelin ei vastaa: " + ex);
-                    errorloki.Add(aika + ": Sähköpostin lähettäminen epäonnistui: " + message);
-
-                }
+                errorloki.Add("Loppuko pojilta kumit");
             }
         }
 
@@ -140,6 +128,7 @@ namespace WeldingDataApplication.Pages
                         // Jos sama id nii ei luoda id:lle uutta rivia vaan lisätään id:hen violation objectit
                         errorloki.Add(o + ": Hitsaus id: " + item.Id + " Valuetype: " + violation.ValueType + " Violationtype: " + violation.ViolationType + " Status: " + item.State + " TimeStap: " + item.Timestamp);
                         o++;
+                        //await sendEmail();
                     }
 
                 }
@@ -150,7 +139,7 @@ namespace WeldingDataApplication.Pages
             catch (Exception e)
             {
                 errorloki.Add(aika + ": Yhteys Savoniaan ei onnistu: " + e);
-                ErrorMessage();
+                await sendEmail();
             }
         }
 
