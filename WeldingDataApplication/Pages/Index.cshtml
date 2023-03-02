@@ -2,10 +2,22 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Savoni x Weldcube";
+    
 }
 <div class="container">
-
     <div class="cmd">
+        <div class="navikointi">
+            <button onclick="location.href='/?handler=OnGet'">Update</button>
+
+            <a href="#error"><button>Error</button></a>
+            <a href="#success"><button>Success</button></a>
+        </div>
+        <div class="counts">       
+            <p class="onnistuicount">@Model.onnistumisloki.Count</p>
+            <p class="errorcount">@Model.errorloki.Count</p>
+        </div>
+    </div>
+    <div class="cmd" id="error">
         <h1>error</h1>
         @foreach (var item in Model.errorloki)
         {
@@ -15,7 +27,7 @@
         }
     </div>
 
-    <div class="cmd">
+    <div class="cmd" id="success">
         <h1>success</h1>
         @foreach (var item in Model.onnistumisloki)
         {

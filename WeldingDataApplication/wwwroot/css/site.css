@@ -6,6 +6,7 @@ body {
 h1 {
     text-transform: uppercase;
     font-family: Georgia, serif;
+    color: #cad2c5;
 }
 h5 {
     text-align: center;
@@ -46,25 +47,99 @@ p {
     vertical-align: middle;
 }
 .container {
-/*    display: flex;*/
+    /*    display: flex;*/
 }
+
 .cmd {
+
     margin: 25px;
     padding: 25px;
     background-color: #354f52;
     border-radius: 25px;
-    border: 5px solid #e2e2e2;
+    border: 5px solid #cad2c5;
     word-wrap: break-word;
-/*   float: left;*/
-  width: 100%;
+    /* float: left;*/
+    width: 100%;
     margin-right: 5%;
 }
+    .cmd:first-child {
+        display: flex;
+        justify-content: space-between;
+    }
+
+button {
+    background-color: #52796f;
+    width: 75px;
+    height: 75px;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 50px;
+    font-size: 15px;
+    border: none;
+    color: #cad2c5;
+    text-transform: uppercase;
+}
+
+.counts {
+/*    display: flex;
+    align-items: center;
+    text-align: center;*/
+ 
+
+}
+    .counts p {
+        font-size: 35px;
+        margin: 0 5px;
+    }
 
 
 
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
 
+.errorcount {
+    color: #e06057;
+    animation: blink 1s infinite;
+}
 
+    .errorcount::before {
+        content: "";
+        background-image: url('/images/error35.png');
+        background-repeat: no-repeat;
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        margin-right: 10px;
+        vertical-align: middle;
+    }
 
+.onnistuicount {
+    color: #81bf71;
+}
+
+    .onnistuicount::before {
+        content: "";
+        background-image: url('/images/success35.png');
+        background-repeat: no-repeat;
+        display: inline-block;
+        width: 35px;
+        height: 35px;
+        margin-right: 10px;
+        vertical-align: middle;
+    }
+
+.navikointi {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+    .navikointi button {
+        margin-right: 15px;
+    }
 
 
 

@@ -2,7 +2,6 @@
 using System.Net;
 using System.Net.Mail;
 using WeldingDataApplication.Classes;
-using System.Xml.Serialization;
 
 namespace WeldingDataApplication.Pages
 {
@@ -96,15 +95,15 @@ namespace WeldingDataApplication.Pages
                 var i = 0;
                 var o = 0;
                 StreamWriter sw = new StreamWriter("./WeldingDataApplication/AllWelds.txt");
-    
+
 
                 foreach (Weld.WeldInfo item in Message.WeldInfos)
                 {
 
-                        var url = item.Details;
-                        url += apiKey;
+                    var url = item.Details;
+                    url += apiKey;
                     // Kirjoitetaan txt tiedostoon kaikki nyt olemassa olevat tiedostot
-                   // sw.WriteLine(i + ": Hitsaus id: " + item.Id + " State: " + item.State + " TimeStamp: " + item.Timestamp);
+                    // sw.WriteLine(i + ": Hitsaus id: " + item.Id + " State: " + item.State + " TimeStamp: " + item.Timestamp);
 
                     /*   //Pass the file path and file name to the StreamReader constructor
                         StreamReader sr = new StreamReader("C:\\Sample.txt");
@@ -120,11 +119,11 @@ namespace WeldingDataApplication.Pages
                         }
                         //close the file
                         sr.Close();*/
-                
+
                     if (item.State != "NotOk")
                     {
 
-                        onnistumisloki.Add(i+ ": Hitsaus id: " + item.Id + " State: " + item.State + " TimeStamp: " + item.Timestamp);
+                        onnistumisloki.Add(i + ": Hitsaus id: " + item.Id + " State: " + item.State + " TimeStamp: " + item.Timestamp);
                         i++;
                     }
 
@@ -134,12 +133,12 @@ namespace WeldingDataApplication.Pages
 
                     // täältä tulee hits id jolla voi olla paaljon erroreita
 
-                    foreach ( var violation in rootWanted.WeldData.LimitViolations )
+                    foreach (var violation in rootWanted.WeldData.LimitViolations)
                     {
                         string valueType = violation.ValueType;
                         string violationType = violation.ViolationType;
                         // Jos sama id nii ei luoda id:lle uutta rivia vaan lisätään id:hen violation objectit
-                        errorloki.Add(o+": Hitsaus id: "+ item.Id + " Valuetype: " + violation.ValueType+ " Violationtype: "+ violation.ViolationType+ " Status: "+item.State+" TimeStap: "+item.Timestamp);
+                        errorloki.Add(o + ": Hitsaus id: " + item.Id + " Valuetype: " + violation.ValueType + " Violationtype: " + violation.ViolationType + " Status: " + item.State + " TimeStap: " + item.Timestamp);
                         o++;
                     }
 
