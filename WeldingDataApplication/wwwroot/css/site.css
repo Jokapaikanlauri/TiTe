@@ -150,7 +150,7 @@ table {
     margin: 0 auto;
     border-collapse: collapse;
     border-style: hidden;
-
+    margin-bottom: 25px;
 }
 
 
@@ -185,3 +185,10 @@ tr {
         color: white;
     }
 
+.system {
+    background-color: #2f3e46;
+    padding: 25px;
+    
+    border-radius: 25px;
+    border: 5px solid #cad2c5;
+}

@@ -18,7 +18,7 @@
         </div>
     </div>
     <div class="cmd" id="error">
-        <h1>error</h1>
+        <h1>Welding error</h1>
 
         <table>
             <thead>
@@ -55,23 +55,65 @@
             </tbody>
 
         </table>
+        <h1>system error</h1>
+       <div class="system">
+            @foreach (var item in Model.errorloki)
+            {
 
-        @foreach (var item in Model.errorloki)
-        {
+                <p class="error">@item</p>
 
-            <p class="error">@item</p>
-
-        }
+            }
+       </div>
     </div>
 
     <div class="cmd" id="success">
-        <h1>success</h1>
+        <h1>Welding success</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th><img src="/images/id.png"></th>
+                    <th><img src="/images/date.png"></th>
+                    <th><img src="/images/time.png"></th>
+                    <th><img src="/images/value.png"></th>
+                    <th><img src="/images/violation.png"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>2023-03-03</td>
+                    <td>4:20</td>
+                    <td>ERROR IN SIMOS BRAIN</td>
+                    <td>none</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2023-03-03</td>
+                    <td>4:20</td>
+                    <td>ERROR IN SIMOS BRAIN</td>
+                    <td>none</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2023-03-03</td>
+                    <td>4:20</td>
+                    <td>ERROR IN SIMOS BRAIN</td>
+                    <td>none</td>
+                </tr>
+            </tbody>
+
+        </table>
+        <h1>system success</h1>
+
+        <div class="system">
         @foreach (var item in Model.onnistumisloki)
         {
 
             <p class="onnistui">@item</p>
 
         }
+        </div>
     </div>
 
 

@@ -8,23 +8,23 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\harti\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\unelm\\.nuget\\packages\\": {},
+    "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Kouluhommat\\TiTe-Projekti\\Oikea projekti\\WeldingDataApplication\\WeldingDataApplication.csproj",
+      "projectUniqueName": "D:\\Visual Studio Projektit\\Koulu\\Tietotekniikkaprojekti\\WeldingDataApplication\\WeldingDataApplication.csproj",
       "projectName": "WeldingDataApplication",
-      "projectPath": "D:\\Kouluhommat\\TiTe-Projekti\\Oikea projekti\\WeldingDataApplication\\WeldingDataApplication.csproj",
-      "packagesPath": "C:\\Users\\harti\\.nuget\\packages\\",
-      "outputPath": "D:\\Kouluhommat\\TiTe-Projekti\\Oikea projekti\\WeldingDataApplication\\obj\\",
+      "projectPath": "D:\\Visual Studio Projektit\\Koulu\\Tietotekniikkaprojekti\\WeldingDataApplication\\WeldingDataApplication.csproj",
+      "packagesPath": "C:\\Users\\unelm\\.nuget\\packages\\",
+      "outputPath": "D:\\Visual Studio Projektit\\Koulu\\Tietotekniikkaprojekti\\WeldingDataApplication\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "E:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\harti\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\unelm\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -70,7 +70,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.200\\RuntimeIdentifierGraph.json"
       }
     }
   }
