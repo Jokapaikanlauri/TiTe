@@ -5,6 +5,11 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeldingDataApplication", "WeldingDataApplication.csproj", "{879DD26A-9585-47C7-9EE5-9F5E0CAC9C5B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AFED20C0-24CB-4796-8DF3-6B1E0986A94B}"
+	ProjectSection(SolutionItems) = preProject
+		AllWelds.txt = AllWelds.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

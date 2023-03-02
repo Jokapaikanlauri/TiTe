@@ -4,15 +4,6 @@
     ViewData["Title"] = "Savoni x Weldcube";
 }
 <div class="container">
-    <div class="cmd">
-        <h1>success</h1>
-        @foreach (var item in Model.onnistumisloki)
-        {
-
-            <p class="onnistui">@item</p>
-
-        }
-    </div>
 
     <div class="cmd">
         <h1>error</h1>
@@ -23,6 +14,18 @@
 
         }
     </div>
+
+    <div class="cmd">
+        <h1>success</h1>
+        @foreach (var item in Model.onnistumisloki)
+        {
+
+            <p class="onnistui">@item</p>
+
+        }
+    </div>
+
+
 </div>
 <h5>© Savonian Kumipojat 2023</h5>
 

@@ -76,7 +76,7 @@ namespace WeldingDataApplication.Pages
 
         public async Task OnGet()
         {
-            onnistumisloki.Add(aika + ": Ohjelma käynnistyi");
+            //onnistumisloki.Add(aika + ": Ohjelma käynnistyi");
             try
             {
                 //Etisivulla oleva otsikko kertoo, ollaanko savoniassa vai kotona.
@@ -93,25 +93,59 @@ namespace WeldingDataApplication.Pages
                 Console.WriteLine("Olen Message " + Message);
 
                 // Alotetaan looppaamaan kaikki hitsaukset
+                var i = 0;
+                var o = 0;
+                StreamWriter sw = new StreamWriter("/Users/villeniskanen/Desktop/Tietotekniikkaproj/group-1/WeldingDataApplication/AllWelds.txt");
+    
+
                 foreach (Weld.WeldInfo item in Message.WeldInfos)
                 {
 
                         var url = item.Details;
                         url += apiKey;
-      
-                        //Frontendin lokit.
+                    // Kirjoitetaan txt tiedostoon kaikki nyt olemassa olevat tiedostot
+                   // sw.WriteLine(i + ": Hitsaus id: " + item.Id + " State: " + item.State + " TimeStamp: " + item.Timestamp);
+
+                    /*   //Pass the file path and file name to the StreamReader constructor
+                        StreamReader sr = new StreamReader("C:\\Sample.txt");
+                        //Read the first line of text
+                        line = sr.ReadLine();
+                        //Continue to read until you reach end of file
+                        while (line != null)
+                        {
+                            //write the line to console window
+                            Console.WriteLine(line);
+                            //Read the next line
+                            line = sr.ReadLine();
+                        }
+                        //close the file
+                        sr.Close();*/
+                
+                    if (item.State != "NotOk")
+                    {
+
+                        onnistumisloki.Add(i+ ": Hitsaus id: " + item.Id + " State: " + item.State + " TimeStamp: " + item.Timestamp);
+                        i++;
+                    }
+
+                    //Frontendin lokit.
 
                     var rootWanted = await myHttpClient.GetFromJsonAsync<WeldDetails.RootObject>(url);
-           
+
+                    // täältä tulee hits id jolla voi olla paaljon erroreita
+
                     foreach ( var violation in rootWanted.WeldData.LimitViolations )
                     {
                         string valueType = violation.ValueType;
                         string violationType = violation.ViolationType;
-                        Console.WriteLine("isällä");
-                        Console.WriteLine($"Value Type: {valueType}, Violation Type: {violationType}");
+                        // Jos sama id nii ei luoda id:lle uutta rivia vaan lisätään id:hen violation objectit
+                        errorloki.Add(o+": Hitsaus id: "+ item.Id + " Valuetype: " + violation.ValueType+ " Violationtype: "+ violation.ViolationType+ " Status: "+item.State+" TimeStap: "+item.Timestamp);
+                        o++;
                     }
 
                 }
+                // Suljetaan kirjottaminen
+                sw.Close();
 
             }
             catch (Exception e)
