@@ -7,6 +7,8 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using WeldingDataApplication.Classes;
+using System.Text.Json;
+using System.Net.NetworkInformation;
 
 namespace WeldingDataApplication.Pages
 {
@@ -15,6 +17,9 @@ namespace WeldingDataApplication.Pages
         static HttpClient myHttpClient = new HttpClient();
         public Weld.Root? Message;
         public List<WeldDetails.WeldData>? rootList;
+        public List<Database>? DatabaseItems = new List<Database>();
+        public List<Database>? SuccessList = new List<Database>();
+        public List<Database>? ErrorsList = new List<Database>();
         public WeldDetails.RootObject rootElement;
         private readonly ILogger<IndexModel> _logger;
         private string apiKey = "?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1";
@@ -37,7 +42,7 @@ namespace WeldingDataApplication.Pages
 
         //Sähköpostin lähetyksenkoodi, ei vielä testattu. Koitan kommentoida jotta muistaa jatkossa mitä on ajatellu
 
-
+        /*
         public async Task sendEmail()
         {
             try { 
@@ -60,7 +65,7 @@ namespace WeldingDataApplication.Pages
                 errorloki.Add("Loppuko pojilta kumit");
             }
         }
-
+        */
         public async Task OnGet()
         {
             //onnistumisloki.Add(aika + ": Ohjelma käynnistyi");
@@ -71,19 +76,14 @@ namespace WeldingDataApplication.Pages
                 //errorloki.Add(localDate + ": Yhdistetään Savonian verkoon");
                 // Muutetaan haettu json formaatttin
                 myHttpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                //Message = await myHttpClient.GetFromJsonAsync<List<Weld.WeldInfo>>("http://weldcube.ky.local/api/v4/Welds?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1%20");
-
-
                 // Haetaan rajapinnasta 
                 Message = await myHttpClient.GetFromJsonAsync<Weld.Root>("http://weldcube.ky.local/api/v4/Welds?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1%20");
-                //Message = await myHttpClient.GetFromJsonAsync<Weld.Root>("http://weldcube.ky.local/api/v4/Welds?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1");
-                Console.WriteLine("Olen Message " + Message);
+       
 
-                // Alotetaan looppaamaan kaikki hitsaukset
                 var i = 0;
                 var o = 0;
-                StreamWriter sw = new StreamWriter("./WeldingDataApplication/AllWelds.txt");
-
+                var a = 0;
+               // StreamWriter sw = new StreamWriter("./WeldingDataApplication/AllWelds.txt");
 
                 foreach (Weld.WeldInfo item in Message.WeldInfos)
                 {
@@ -107,12 +107,29 @@ namespace WeldingDataApplication.Pages
                         }
                         //close the file
                         sr.Close();*/
+                    a++;
+                    DatabaseItems.Add(new Database
+                    {
+                        Row = a,
+                        Id = item.Id,
+                        State = item.State,
+                        TimeStamp = item.Timestamp,
+                        Time = item.Timestamp.ToShortTimeString(),
+                        Date = item.Timestamp.ToShortDateString()
+                    });
 
                     if (item.State != "NotOk")
                     {
-
-                        onnistumisloki.Add(i + ": Hitsaus id: " + item.Id + " State: " + item.State + " TimeStamp: " + item.Timestamp);
                         i++;
+                        SuccessList.Add(new Database
+                        {
+                            Row = i,
+                            Id = item.Id,
+                            State = item.State,
+                            Time = item.Timestamp.ToShortTimeString(),
+                            Date = item.Timestamp.ToShortDateString(),
+                            TimeStamp = item.Timestamp
+                        });
                     }
 
                     //Frontendin lokit.
@@ -126,23 +143,31 @@ namespace WeldingDataApplication.Pages
                         string valueType = violation.ValueType;
                         string violationType = violation.ViolationType;
                         // Jos sama id nii ei luoda id:lle uutta rivia vaan lisätään id:hen violation objectit
-                        errorloki.Add(o + ": Hitsaus id: " + item.Id + " Valuetype: " + violation.ValueType + " Violationtype: " + violation.ViolationType + " Status: " + item.State + " TimeStap: " + item.Timestamp);
+
                         o++;
+                        ErrorsList.Add(new Database
+                        {
+                            Row = o,
+                            Id = item.Id,
+                            ViolationType = violation.ViolationType,
+                            Valuetype = violation.ValueType,
+                            State = item.State,
+                            Time = item.Timestamp.ToShortTimeString(),
+                            Date = item.Timestamp.ToShortDateString(),
+                            TimeStamp = item.Timestamp
+                        }) ;
                         //await sendEmail();
                     }
-
                 }
                 // Suljetaan kirjottaminen
-                sw.Close();
+                //sw.Close();
 
             }
             catch (Exception e)
             {
                 errorloki.Add(aika + ": Yhteys Savoniaan ei onnistu: " + e);
-                await sendEmail();
+               // await sendEmail();
             }
         }
-
-
     }
 }

@@ -2,7 +2,8 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Savonia x Weldcube";
-    
+
+
 }
 <div class="container">
     <div class="cmd">
@@ -12,9 +13,16 @@
             <a href="#error"><button><img src="/images/errorButton.png"></button></a>
             <a href="#success"><button><img src="/images/succsessButton.png"></button></a>
         </div>
-        <div class="counts">       
-            <p class="onnistuicount">@Model.onnistumisloki.Count</p>
-            <p class="errorcount">@Model.errorloki.Count</p>
+        <div class="counts">
+            @if (@Model.SuccessList.Count >=1)
+             {
+                    <p class="onnistuicount">@Model.SuccessList.Count</p>
+             }
+
+            @if (@Model.ErrorsList.Count >= 1)
+            {
+                <p class="errorcount">@Model.ErrorsList.Count</p>
+            }
         </div>
     </div>
     <div class="cmd" id="error">
@@ -23,15 +31,17 @@
         <table>
             <thead>
                 <tr>
+                    <th>ROW</th>
                     <th><img src="/images/id.png"></th>
                     <th><img src="/images/date.png"></th>
                     <th><img src="/images/time.png"></th>
                     <th><img src="/images/value.png"></th>
                     <th><img src="/images/violation.png"></th>
+                    <th>STATE</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                @*<tr>
                     <td>1</td>
                     <td>2023-03-03</td>
                     <td>4:20</td>
@@ -51,16 +61,30 @@
                     <td>4:20</td>
                     <td>ERROR IN SIMOS BRAIN</td>
                     <td>none</td>
-                </tr>
+                </tr>*@
+                @foreach (var item in Model.ErrorsList)
+                {
+                    <tr>
+                        <td>@item.Row</td>
+                        <td>@item.Id</td>
+                        <td>@item.Date</td>
+                        <td>@item.Time</td>
+                        <td>@item.Valuetype</td>
+                        <td>@item.ViolationType</td>
+                        <td>@item.State</td>
+                    </tr>
+                  
+
+                }
             </tbody>
 
         </table>
         <h1>system error</h1>
        <div class="system">
-            @foreach (var item in Model.errorloki)
+            @foreach (var item2 in Model.errorloki)
             {
 
-                <p class="error">@item</p>
+                <p class="error">@item2</p>
 
             }
        </div>
@@ -72,15 +96,17 @@
         <table>
             <thead>
                 <tr>
+                    <th>ROW</th>
                     <th><img src="/images/id.png"></th>
                     <th><img src="/images/date.png"></th>
                     <th><img src="/images/time.png"></th>
-                    <th><img src="/images/value.png"></th>
-                    <th><img src="/images/violation.png"></th>
+                    <th>State</th>
+                    @*<th><img src="/images/value.png"></th>
+                    <th><img src="/images/violation.png"></th>*@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                @*<tr>
                     <td>1</td>
                     <td>2023-03-03</td>
                     <td>4:20</td>
@@ -100,7 +126,19 @@
                     <td>4:20</td>
                     <td>ERROR IN SIMOS BRAIN</td>
                     <td>none</td>
-                </tr>
+                </tr>*@
+                @foreach (var item in Model.SuccessList)
+                {
+                    <tr>
+                        <td>@item.Row</td>
+                        <td>@item.Id</td>
+                        <td>@item.Date</td>
+                        <td>@item.Time</td>
+                        <td>@item.State</td>
+                    </tr>
+
+
+                }
             </tbody>
 
         </table>
