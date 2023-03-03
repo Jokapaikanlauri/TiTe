@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "8DElnT9/l+AC9IgxwA4OGs+54nlBje7QdOq4R36Q5dZ5nZ4JDzoxreHUC0SegaKILlMsFKRoYNRwvb8zDCgklg==",
+  "dgSpecHash": "QNu7ck2Gk6oXRlS70oToohr/PysaxgDLMFMeZoCGMGYISfjIzTRcYqO264UuRQ+t6QEBloCnLnFwZTsMFlSCMw==",
   "success": true,
   "projectFilePath": "/Users/villeniskanen/Desktop/Tietotekniikkaproj/group-1/WeldingDataApplication/WeldingDataApplication.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/villeniskanen/.nuget/packages/newtonsoft.json/13.0.2/newtonsoft.json.13.0.2.nupkg.sha512"
+  ],
   "logs": []
 }
