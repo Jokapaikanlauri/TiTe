@@ -73,21 +73,24 @@
                         <td>@item.ViolationType</td>
                         <td>@item.State</td>
                     </tr>
-                  
+
 
                 }
             </tbody>
 
         </table>
-        <h1>system error</h1>
-       <div class="system">
-            @foreach (var item2 in Model.errorloki)
-            {
 
-                <p class="error">@item2</p>
+        @if (@Model.errorloki.Count >= 1)
+        {
+            <h1>system error</h1>
+            <div class="system">
+                @foreach (var item2 in Model.errorloki)
+                {
+                    <p class="error">@item2</p>
+                }
+            </div>
+        }
 
-            }
-       </div>
     </div>
 
     <div class="cmd" id="success">
@@ -142,16 +145,20 @@
             </tbody>
 
         </table>
-        <h1>system success</h1>
-
-        <div class="system">
-        @foreach (var item in Model.onnistumisloki)
+        @if (@Model.onnistumisloki.Count >=1)
         {
+            <h1>system success</h1>
 
-            <p class="onnistui">@item</p>
+            <div class="system">
+                @foreach (var item in Model.onnistumisloki)
+                {
 
+                    <p class="onnistui">@item</p>
+
+                }
+            </div>
         }
-        </div>
+
     </div>
 
 

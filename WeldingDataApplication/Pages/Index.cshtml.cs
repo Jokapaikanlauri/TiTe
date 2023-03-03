@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using WeldingDataApplication.Classes;
 using System.Text.Json;
 using System.Net.NetworkInformation;
+using System.Text.Json.Serialization;
 
 namespace WeldingDataApplication.Pages
 {
@@ -16,11 +17,10 @@ namespace WeldingDataApplication.Pages
     {
         static HttpClient myHttpClient = new HttpClient();
         public Weld.Root? Message;
-        public List<WeldDetails.WeldData>? rootList;
+        public List<WeldDetails.RootObject>? rootList;
         public List<Database>? DatabaseItems = new List<Database>();
         public List<Database>? SuccessList = new List<Database>();
         public List<Database>? ErrorsList = new List<Database>();
-        public WeldDetails.RootObject rootElement;
         private readonly ILogger<IndexModel> _logger;
         private string apiKey = "?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1";
 
@@ -38,6 +38,7 @@ namespace WeldingDataApplication.Pages
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
+            
         }
 
         //Sähköpostin lähetyksenkoodi, ei vielä testattu. Koitan kommentoida jotta muistaa jatkossa mitä on ajatellu
@@ -71,8 +72,6 @@ namespace WeldingDataApplication.Pages
             //onnistumisloki.Add(aika + ": Ohjelma käynnistyi");
             try
             {
-                //Etisivulla oleva otsikko kertoo, ollaanko savoniassa vai kotona.
-
                 //errorloki.Add(localDate + ": Yhdistetään Savonian verkoon");
                 // Muutetaan haettu json formaatttin
                 myHttpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
@@ -83,16 +82,14 @@ namespace WeldingDataApplication.Pages
                 var i = 0;
                 var o = 0;
                 var a = 0;
-               // StreamWriter sw = new StreamWriter("./WeldingDataApplication/AllWelds.txt");
-
+                StreamWriter sw = new StreamWriter("/Users/villeniskanen/Desktop/Tietotekniikkaproj/group-1/WeldingDataApplication/AllWelds.txt");
+                
                 foreach (Weld.WeldInfo item in Message.WeldInfos)
                 {
-
                     var url = item.Details;
                     url += apiKey;
                     // Kirjoitetaan txt tiedostoon kaikki nyt olemassa olevat tiedostot
-                    // sw.WriteLine(i + ": Hitsaus id: " + item.Id + " State: " + item.State + " TimeStamp: " + item.Timestamp);
-
+                    
                     /*   //Pass the file path and file name to the StreamReader constructor
                         StreamReader sr = new StreamReader("C:\\Sample.txt");
                         //Read the first line of text
@@ -107,6 +104,11 @@ namespace WeldingDataApplication.Pages
                         }
                         //close the file
                         sr.Close();*/
+
+                    //Frontendin lokit.
+
+                    var rootWanted = await myHttpClient.GetFromJsonAsync<WeldDetails.RootObject>(url);
+
                     a++;
                     DatabaseItems.Add(new Database
                     {
@@ -115,12 +117,43 @@ namespace WeldingDataApplication.Pages
                         State = item.State,
                         TimeStamp = item.Timestamp,
                         Time = item.Timestamp.ToShortTimeString(),
-                        Date = item.Timestamp.ToShortDateString()
+                        Date = item.Timestamp.ToShortDateString(),
+             
+
                     });
+                
+
+
+                    // Sähköpostiin tarvittavat PArtItemNumber ja Serialnumber
+                    //if (rootWanted !=null)
+                    //{
+                    //    rootList.Add(nrootWanted);
+                    //}
+                    // Kaikki databasiin kirjoitetut hitsaukset
+                    //if (rootList != null)
+                    //{
+                    //       foreach (var part in rootList)
+                    //    {
+                    // Sähköpostimiehille
+                    //DatabaseItems.Add(new Database
+                    //{
+                    //    Row = a,
+                    //    Id = part.WeldId,
+                    //    State = part.State,
+                    //    TimeStamp = part.TimeStamp,
+                    //    Time = part.TimeStamp.ToShortTimeString(),
+                    //    Date = part.TimeStamp.ToShortDateString(),
+                    //    PartItemNumber = part.PartItemNumber,// Sähköpostimiehille
+                    //    PartSerialNumber = part.PartSerialNumber,// Sähköpostimiehille
+                    //});
+                    //    }
+                    //}
+
 
                     if (item.State != "NotOk")
                     {
                         i++;
+                        // Onnistuneet hitsaukset lista
                         SuccessList.Add(new Database
                         {
                             Row = i,
@@ -132,10 +165,6 @@ namespace WeldingDataApplication.Pages
                         });
                     }
 
-                    //Frontendin lokit.
-
-                    var rootWanted = await myHttpClient.GetFromJsonAsync<WeldDetails.RootObject>(url);
-
                     // täältä tulee hits id jolla voi olla paaljon erroreita
 
                     foreach (var violation in rootWanted.WeldData.LimitViolations)
@@ -145,6 +174,7 @@ namespace WeldingDataApplication.Pages
                         // Jos sama id nii ei luoda id:lle uutta rivia vaan lisätään id:hen violation objectit
 
                         o++;
+                        // Hitsaukset jossa on error
                         ErrorsList.Add(new Database
                         {
                             Row = o,
@@ -159,8 +189,10 @@ namespace WeldingDataApplication.Pages
                         //await sendEmail();
                     }
                 }
+
                 // Suljetaan kirjottaminen
-                //sw.Close();
+       
+                sw.Close();
 
             }
             catch (Exception e)

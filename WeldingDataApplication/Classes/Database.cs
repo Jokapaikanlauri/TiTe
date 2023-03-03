@@ -11,6 +11,8 @@ namespace WeldingDataApplication.Classes
 		public string Time { get; set; }
 		public string Date { get; set; }
         public string State { get; set; }
+		public string PartItemNumber { get; set; }
+		public string PartSerialNumber { get; set; }
 
 
         public Database()
