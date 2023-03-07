@@ -36,10 +36,10 @@
     "PartSerialNumber": ""
   },
   {
-    "Row": 4,
+    "Row": 3,
     "Id": "fcf1b3ab-1fec-4f24-8c30-b308bdc65ba5",
-    "Valuetype": null,
-    "ViolationType": null,
+    "Valuetype": "Tuntematon",
+    "ViolationType": "Tuntematon",
     "TimeStamp": "2023-03-06T13:29:28.782Z",
     "Time": "13.29",
     "Date": "6.3.2023",
@@ -48,10 +48,10 @@
     "PartSerialNumber": ""
   },
   {
-    "Row": 5,
+    "Row": 4,
     "Id": "7ce8953c-44e2-4f1d-a60a-43596f649ac4",
-    "Valuetype": null,
-    "ViolationType": null,
+    "Valuetype": "Tuntematon",
+    "ViolationType": "Tuntematon",
     "TimeStamp": "2023-03-06T13:28:40.14Z",
     "Time": "13.28",
     "Date": "6.3.2023",
@@ -204,10 +204,10 @@
     "PartSerialNumber": ""
   },
   {
-    "Row": 18,
+    "Row": 17,
     "Id": "8b60df5b-9e84-4c68-a9ff-8f917ec07d9c",
-    "Valuetype": null,
-    "ViolationType": null,
+    "Valuetype": "Tuntematon",
+    "ViolationType": "Tuntematon",
     "TimeStamp": "2023-03-06T12:36:16.552Z",
     "Time": "12.36",
     "Date": "6.3.2023",
@@ -216,10 +216,10 @@
     "PartSerialNumber": ""
   },
   {
-    "Row": 19,
+    "Row": 18,
     "Id": "f9d5553c-398c-4f8f-b941-abcab9f3f716",
-    "Valuetype": null,
-    "ViolationType": null,
+    "Valuetype": "Tuntematon",
+    "ViolationType": "Tuntematon",
     "TimeStamp": "2023-03-06T12:34:12.298Z",
     "Time": "12.34",
     "Date": "6.3.2023",

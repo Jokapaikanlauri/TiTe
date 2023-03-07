@@ -53,6 +53,7 @@ namespace WeldingDataApplication.Pages
         public static void addDataBase(object data)
         {
             // Databasen itemien lisäys tähän?
+
         }
         //Sähköpostin lähetyksenkoodi, ei vielä testattu. Koitan kommentoida jotta muistaa jatkossa mitä on ajatellu
 
@@ -113,7 +114,6 @@ namespace WeldingDataApplication.Pages
                         var rootWanted = await myHttpClient.GetFromJsonAsync<WeldDetails.RootObject>(url);
                         var rootLenght = rootWanted.WeldData.LimitViolations.Count();
 
-
                         if (rootLenght == 0)
                         {
                             o++;
@@ -127,9 +127,22 @@ namespace WeldingDataApplication.Pages
                                 Time = item.Timestamp.ToShortTimeString(),
                                 Date = item.Timestamp.ToShortDateString(),
                                 TimeStamp = item.Timestamp,
-                                //PartItemNumber = rootWanted.PartItemNumber,
-                                //PartSerialNumber = item.PartSerialNumber,
+                                PartItemNumber = rootWanted.PartItemNumber,
+                                PartSerialNumber = rootWanted.PartSerialNumber,
 
+                            });
+                            DatabaseItems.Add(new Database
+                            {
+                                Row = a,
+                                Id = item.Id,
+                                PartItemNumber = rootWanted.PartItemNumber,
+                                PartSerialNumber = item.PartSerialNumber,
+                                State = item.State,
+                                TimeStamp = item.Timestamp,
+                                Time = item.Timestamp.ToShortTimeString(),
+                                Date = item.Timestamp.ToShortDateString(),
+                                ViolationType = "Tuntematon",
+                                Valuetype = "Tuntematon"
                             });
                             await sendEmail();
                         }
@@ -155,25 +168,26 @@ namespace WeldingDataApplication.Pages
                                     PartSerialNumber = rootWanted.PartSerialNumber,
 
                                 });
-                         
+                                DatabaseItems.Add(new Database
+                                {
+                                    Row = a,
+                                    Id = item.Id,
+                                    PartItemNumber = rootWanted.PartItemNumber,
+                                    PartSerialNumber = item.PartSerialNumber,
+                                    State = item.State,
+                                    TimeStamp = item.Timestamp,
+                                    Time = item.Timestamp.ToShortTimeString(),
+                                    Date = item.Timestamp.ToShortDateString(),
+                                    ViolationType = violation.ViolationType,
+                                    Valuetype = violation.ValueType
+                                });
+
                                 await sendEmail();
 
                             }
                         }
                         a++;
-                        DatabaseItems.Add(new Database
-                        {
-                            Row = a,
-                            Id = item.Id,
-                            PartItemNumber = rootWanted.PartItemNumber,
-                            PartSerialNumber = item.PartSerialNumber,
-                            State = item.State,
-                            TimeStamp = item.Timestamp,
-                            Time = item.Timestamp.ToShortTimeString(),
-                            Date = item.Timestamp.ToShortDateString(),
-                            //ViolationType = violation.ViolationType,
-                            //Valuetype = violation.ValueType
-                        });
+             
 
                     }
 
