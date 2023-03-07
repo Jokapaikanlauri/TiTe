@@ -1,0 +1,274 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2708
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 using Microsoft.AspNetCore.Connections;\
+using Microsoft.AspNetCore.Mvc.RazorPages;\
+using System.Net;\
+using System.Net.Mail;\
+using System.Text;\
+using System;\
+using System.Net.Http;\
+using System.Threading.Tasks;\
+using WeldingDataApplication.Classes;\
+using System.Text.Json;\
+using System.Net.NetworkInformation;\
+using System.Text.Json.Serialization;\
+using Newtonsoft;\
+using Newtonsoft.Json;\
+using Newtonsoft.Json.Linq;\
+using System.IO;\
+using System.Linq;\
+\
+namespace WeldingDataApplication.Pages\
+\{\
+    public class IndexModel : PageModel\
+    \{\
+        static HttpClient myHttpClient = new HttpClient();\
+        public Weld.Root? Message;\
+        public List<WeldDetails.RootObject>? rootList;\
+\
+        public List<Database>? DatabaseItems = new List<Database>();\
+        public List<Database>? SuccessList = new List<Database>();\
+        public List<Database>? ErrorsList = new List<Database>();\
+        private readonly ILogger<IndexModel> _logger;\
+        private string apiKey = "?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1";\
+        public string filePath = "./WeldData.json";\
+\
+        static string apiEndpoint = "https://api.courier.com/send";\
+        static string token = "Bearer " + "dk_prod_0N0HT7KZK64JPHHD1CXY0PKQBF5K";\
+\
+\
+        //lokitiedot\
+        DateTime aika = DateTime.Now;\
+        DateTime dbAika = DateTime.Now;\
+        public List<string> errorloki = new List<string>();\
+        public List<string> onnistumisloki = new List<string>();\
+\
+        public string sample = "t\'e4m\'e4 on testiteksti";\
+\
+        public IndexModel(ILogger<IndexModel> logger)\
+        \{\
+            _logger = logger;\
+\
+        \}\
+\
+        public static void addDataBase(object data)\
+        \{\
+            // Databasen itemien lis\'e4ys t\'e4h\'e4n?\
+        \}\
+        //S\'e4hk\'f6postin l\'e4hetyksenkoodi, ei viel\'e4 testattu. Koitan kommentoida jotta muistaa jatkossa mit\'e4 on ajatellu\
+\
+\
+        public async Task sendEmail()\
+        \{\
+            try\
+            \{\
+                _logger.LogError("sendemail alku");\
+                // attach the Auth Token\
+                myHttpClient.DefaultRequestHeaders.Add("Authorization", token);\
+\
+                // Data.variablesiin pit\'e4\'e4 viitata JSON-taulukon kautta jotta voidaan ilmoittaa muuttuja s\'e4hk\'f6postitse\
+                string payload =\
+                "\{ \\"message\\": \{\\"to\\": \{\\"email\\": \\"savoniankumipojat@gmail.com\\"\},\\"template\\": \\"BVEPX0PS6D4JK5G85C612850QTEB\\", \\"data\\": \{\\"variables\\":\\"sample\\"\}\}\}";\
+\
+\
+                HttpContent content = new StringContent(payload, Encoding.UTF8, "application/json");\
+\
+                var resp = await myHttpClient.PostAsync(new Uri(apiEndpoint), content);\
+                Console.WriteLine(resp);\
+            \}\
+            catch (Exception e)\
+            \{\
+                errorloki.Add("Unexpected error!");\
+            \}\
+        \}\
+\
+        public async Task OnGet()\
+        \{\
+            //onnistumisloki.Add(aika + ": Ohjelma k\'e4ynnistyi");\
+            try\
+            \{\
+                var a = 0; // Kaikkien hitsausten riviluku\
+                           // Kuunnes error. Pytarkastettaan rajapinnasta vaikka 10min v\'e4lein tuleeko siel\'e4 lis\'e4\'e4 itetoa.\
+                           //while (true)\
+                           //\{\
+                           //errorloki.Add(localDate + ": Yhdistet\'e4\'e4n Savonian verkoon");\
+\
+                // Muutetaan haettu json formaatttin\
+                myHttpClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));\
+                // Haetaan rajapinnasta \
+                Message = await myHttpClient.GetFromJsonAsync<Weld.Root>("http://weldcube.ky.local/api/v4/Welds?api_key=dc55e8bbc6b73dbb17c5ecf360a0aeb1%20");\
+                var i = 0;  // Onnistuineiden hitsausten riviluku\
+                var o = 0; // Errorien riviluku\
+                var httpPyynnonPituus = 0;\
+                var jsonListanpituus = 0;\
+\
+                httpPyynnonPituus = Message.WeldInfos.Count();// Toimiikohan?\
+                Console.WriteLine("Httppynn\'f6t: " + httpPyynnonPituus);\
+\
+                string WeldData = System.IO.File.ReadAllText("./WeldData.json");\
+                List<Database> data = JsonConvert.DeserializeObject<List<Database>>(WeldData);\
+\
+                if (data != null)\
+                \{\
+                    jsonListanpituus = data.Count(); // Meid\'e4n json tiedoston pituus\
+                \}\
+                Console.WriteLine("Datan pituus: " + jsonListanpituus);\
+                // JOS tieto rajapinnassa ei ole muuttunut ei tehd\'e4 mit\'e4\'e4n ja menn\'e4\'e4n threadiin nukkumaan. \
+                // if (jsonListanpituus == httpPyynnonPituus)\
+                // \{\
+                //     Console.WriteLine("Tiedot ajan tasalla");\
+\
+                // \}\
+                // // Jos tieto on muuttunut tehd\'e4\'e4n alalpuolen koodi ja lis\'e4t\'e4\'e4n lis\'e4t\'e4\'e4n json tiedostoon uudet tiedot. \
+                //else\
+                //\{\
+                // /IDeoita otetaan vastaan kuinka olla tarkastamatta aina kaikkia.?\
+                foreach (Weld.WeldInfo item in Message.WeldInfos)\
+                \{\
+                    var url = item.Details;\
+                    url += apiKey;\
+                    dbAika = item.Timestamp;\
+                    var wantedTime = aika - dbAika;\
+\
+                    //Otetaan item kiinni jossa on errori, ja tarkastetaan sen errorit\
+                    if (item.State != "Ok")\
+                    \{\
+                        // Haetaan detailit vain jossa on error olemassa\
+                        var rootWanted = await myHttpClient.GetFromJsonAsync<WeldDetails.RootObject>(url);\
+\
+                        foreach (var violation in rootWanted.WeldData.LimitViolations)\
+                        \{\
+                            string valueType = violation.ValueType;\
+                            string violationType = violation.ViolationType;\
+\
+\
+\
+                            // Hitsaukset jossa on error\
+                            // Tarkastetaan onko id jo listassa, ennen sen lis\'e4yst\'e4. // TODO t\'e4m\'e4 ei viel\'e4 relevantti\
+                            // Jos Tieto on liian vanhaa, ei sit\'e4 oteta db listaan mukaan\
+                            //if (wantedTime.Days < 20 )\
+                            //\{\
+                            // T\'e4ss\'e4 tutkittava, ett\'e4 onko jo id olemassa listalla TODO\
+                            o++;\
+                            ErrorsList.Add(new Database\
+                            \{\
+                                Row = o,\
+                                Id = item.Id,\
+                                ViolationType = violation.ViolationType,\
+                                Valuetype = violation.ValueType,\
+                                State = item.State,\
+                                Time = item.Timestamp.ToShortTimeString(),\
+                                Date = item.Timestamp.ToShortDateString(),\
+                                TimeStamp = item.Timestamp,\
+                                PartItemNumber = rootWanted.PartItemNumber,\
+                                PartSerialNumber = rootWanted.PartSerialNumber,\
+\
+                            \});\
+                            //  await sendEmail();\
+\
+                            // \}\
+\
+                        \}\
+                    \}\
+\
+\
+                    // Tarkastetaan onnistuneiden hitsausten m\'e4\'e4r\'e4 viimeiselt\'e4 5:lt\'e4 p\'e4iv\'e4lt\'e4\
+                    if (item.State != "NotOk" && wantedTime.Days <= 5)\
+                    \{\
+                        i++;\
+                        // Onnistuneet hitsaukset lista\
+                        // T\'e4ss\'e4 tutkittava, ett\'e4 onko jo id olemassa listalla TODO\
+                        SuccessList.Add(new Database\
+                        \{\
+                            Row = i,\
+                            Id = item.Id,\
+                            State = item.State,\
+                            Time = item.Timestamp.ToShortTimeString(),\
+                            Date = item.Timestamp.ToShortDateString(),\
+                            TimeStamp = item.Timestamp\
+                        \});\
+                    \}\
+\
+                    // Lis\'e4t\'e4\'e4 vain uudet hitsaukset listaan.\
+                    if (httpPyynnonPituus != jsonListanpituus)// T\'e4h\'e4n olisiko jotain nopeampaa tyyli\'e4?\
+                    \{\
+                        if (data != null)\
+                        \{\
+                            foreach (var weldItem in data)\
+                            \{\
+                                if (DatabaseItems.Contains(weldItem)) // TArkastettava toimiiko\
+                                \{\
+                                    Console.WriteLine(weldItem.Id + " . Oli jo listassa");// TArkast\
+                                \}\
+                                else\
+                                \{\
+                                    a++;\
+                                    DatabaseItems.Add(new Database\
+                                    \{\
+                                        Row = a,\
+                                        Id = item.Id,\
+                                        State = item.State,\
+                                        TimeStamp = item.Timestamp,\
+                                        Time = item.Timestamp.ToShortTimeString(),\
+                                        Date = item.Timestamp.ToShortDateString(),\
+                                        //PartItemNumber = weldItem.PartItemNumber,\
+                                        //PartSerialNumber = weldItem.PartSerialNumber\
+                                    \});\
+                                \}\
+\
+                            \}\
+                        \}\
+                        else\
+                        \{\
+                            // T\'e4ll\'e4 systeemille funktio\
+                            a++;\
+                            DatabaseItems.Add(new Database\
+                            \{\
+                                Row = a,\
+                                Id = item.Id,\
+                                State = item.State,\
+                                TimeStamp = item.Timestamp,\
+                                Time = item.Timestamp.ToShortTimeString(),\
+                                Date = item.Timestamp.ToShortDateString(),\
+\
+                            \});\
+                        \}\
+\
+\
+                        // Onkohan oikeassa kohdassa while looppiin n\'e4hden??? Tarkastaa ett\
+                        // lis\'e4\'e4k\'f6 vain yhden rivin vai kirjoittaa aina uusiks.\
+                        // Kirjoitetaan jsion \
+                        string jsonString = JsonConvert.SerializeObject(DatabaseItems, Formatting.Indented);\
+                        byte[] bytes = Encoding.UTF8.GetBytes(jsonString);\
+                        System.IO.File.WriteAllBytes(filePath, bytes);\
+\
+                    \}\
+\
+\
+                \}// item foreach\
+\
+\
+\
+                // \}\
+\
+                //    Thread.Sleep(2000);\
+                //\}// WHile loppuu\
+\
+\
+\
+\
+\
+            \}\
+            catch (Exception e)\
+            \{\
+                errorloki.Add(aika + ": Yhteys Savoniaan ei onnistu: " + e);\
+                await sendEmail();\
+            \}\
+        \}\
+    \}\
+\}}
