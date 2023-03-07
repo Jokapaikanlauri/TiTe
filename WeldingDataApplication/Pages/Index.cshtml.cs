@@ -1,19 +1,7 @@
-﻿using Microsoft.AspNetCore.Connections;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using System.Net;
-using System.Net.Mail;
-using System.Text;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using WeldingDataApplication.Classes;
-using System.Text.Json;
-using System.Net.NetworkInformation;
-using System.Text.Json.Serialization;
-using Newtonsoft;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System.IO;
+using System.Text;
+using WeldingDataApplication.Classes;
 
 
 
@@ -78,7 +66,7 @@ namespace WeldingDataApplication.Pages
             }
             catch (Exception e)
             {
-                errorloki.Add("Sähköpostin lähetys epäonnistui!");
+                errorloki.Add(aika + ": Sähköpostin lähetys epäonnistui!");
             }
         }
 
@@ -187,7 +175,7 @@ namespace WeldingDataApplication.Pages
                             }
                         }
                         a++;
-             
+
 
                     }
 
@@ -232,7 +220,7 @@ namespace WeldingDataApplication.Pages
             }
             catch (Exception e)
             {
-                errorloki.Add(aika + ": Yhteys Savoniaan ei onnistu: " + e);
+                errorloki.Add(aika + ": Yhteys Savoniaan ei onnistu");
                 await sendEmail();
             }
         }
