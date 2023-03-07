@@ -32,7 +32,9 @@
             <thead>
                 <tr>
                     <th>ROW</th>
-                    <th><img src="/images/id.png"></th>
+                    <th><img src="/images/id.png"> weldid</th>
+                    <th><img src="">PartId</th>
+                    <th><img src="">PartSerialNumber</th>
                     <th><img src="/images/date.png"></th>
                     <th><img src="/images/time.png"></th>
                     <th><img src="/images/value.png"></th>
@@ -41,40 +43,19 @@
                 </tr>
             </thead>
             <tbody>
-                @*<tr>
-                    <td>1</td>
-                    <td>2023-03-03</td>
-                    <td>4:20</td>
-                    <td>ERROR IN SIMOS BRAIN</td>
-                    <td>none</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2023-03-03</td>
-                    <td>4:20</td>
-                    <td>ERROR IN SIMOS BRAIN</td>
-                    <td>none</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2023-03-03</td>
-                    <td>4:20</td>
-                    <td>ERROR IN SIMOS BRAIN</td>
-                    <td>none</td>
-                </tr>*@
                 @foreach (var item in Model.ErrorsList)
                 {
                     <tr>
                         <td>@item.Row</td>
                         <td>@item.Id</td>
+                        <td>@item.PartItemNumber</td>
+                        <td>@item.PartSerialNumber</td>
                         <td>@item.Date</td>
                         <td>@item.Time</td>
                         <td>@item.Valuetype</td>
                         <td>@item.ViolationType</td>
                         <td>@item.State</td>
                     </tr>
-
-
                 }
             </tbody>
 
@@ -100,41 +81,22 @@
             <thead>
                 <tr>
                     <th>ROW</th>
-                    <th><img src="/images/id.png"></th>
+                    <th><img src="/images/id.png">weldid</th>
+                    <th><img src="">PartID</th>
                     <th><img src="/images/date.png"></th>
                     <th><img src="/images/time.png"></th>
                     <th>State</th>
                     @*<th><img src="/images/value.png"></th>
-                    <th><img src="/images/violation.png"></th>*@
+        <th><img src="/images/violation.png"></th>*@
                 </tr>
             </thead>
             <tbody>
-                @*<tr>
-                    <td>1</td>
-                    <td>2023-03-03</td>
-                    <td>4:20</td>
-                    <td>ERROR IN SIMOS BRAIN</td>
-                    <td>none</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2023-03-03</td>
-                    <td>4:20</td>
-                    <td>ERROR IN SIMOS BRAIN</td>
-                    <td>none</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>2023-03-03</td>
-                    <td>4:20</td>
-                    <td>ERROR IN SIMOS BRAIN</td>
-                    <td>none</td>
-                </tr>*@
                 @foreach (var item in Model.SuccessList)
                 {
                     <tr>
                         <td>@item.Row</td>
                         <td>@item.Id</td>
+                        <td>@item.PartItemNumber</td>
                         <td>@item.Date</td>
                         <td>@item.Time</td>
                         <td>@item.State</td>
@@ -143,7 +105,6 @@
 
                 }
             </tbody>
-
         </table>
         @if (@Model.onnistumisloki.Count >=1)
         {

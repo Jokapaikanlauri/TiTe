@@ -34,7 +34,7 @@ namespace WeldingDataApplication.Pages
 
         static string apiEndpoint = "https://api.courier.com/send";
         static string token = "Bearer " + "dk_prod_0N0HT7KZK64JPHHD1CXY0PKQBF5K";
-        
+
 
         //lokitiedot
         DateTime aika = DateTime.Now;
@@ -47,39 +47,41 @@ namespace WeldingDataApplication.Pages
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
-            
+
         }
-      
+
         public static void addDataBase(object data)
         {
-           // Databasen itemien lisäys tähän?
+            // Databasen itemien lisäys tähän?
+
         }
         //Sähköpostin lähetyksenkoodi, ei vielä testattu. Koitan kommentoida jotta muistaa jatkossa mitä on ajatellu
 
-        
+
         public async Task sendEmail()
         {
-            try { 
-            _logger.LogError("sendemail alku");
-            // attach the Auth Token
-            myHttpClient.DefaultRequestHeaders.Add("Authorization", token);
+            try
+            {
+                _logger.LogError("sendemail alku");
+                // attach the Auth Token
+                myHttpClient.DefaultRequestHeaders.Add("Authorization", token);
 
-            // Data.variablesiin pitää viitata JSON-taulukon kautta jotta voidaan ilmoittaa muuttuja sähköpostitse
-            string payload =
-            "{ \"message\": {\"to\": {\"email\": \"savoniankumipojat@gmail.com\"},\"template\": \"BVEPX0PS6D4JK5G85C612850QTEB\", \"data\": {\"variables\":\"sample\"}}}";
+                // Data.variablesiin pitää viitata JSON-taulukon kautta jotta voidaan ilmoittaa muuttuja sähköpostitse
+                string payload =
+                "{ \"message\": {\"to\": {\"email\": \"savoniankumipojat@gmail.com\"},\"template\": \"BVEPX0PS6D4JK5G85C612850QTEB\", \"data\": {\"variables\":\"sample\"}}}";
 
 
-            HttpContent content = new StringContent(payload, Encoding.UTF8, "application/json");
+                HttpContent content = new StringContent(payload, Encoding.UTF8, "application/json");
 
-            var resp = await myHttpClient.PostAsync(new Uri(apiEndpoint), content);
-            Console.WriteLine(resp);
+                var resp = await myHttpClient.PostAsync(new Uri(apiEndpoint), content);
+                // Console.WriteLine(resp);
             }
             catch (Exception e)
             {
-                errorloki.Add("Loppuko pojilta kumit");
+                errorloki.Add("Sähköpostin lähetys epäonnistui!");
             }
         }
-        
+
         public async Task OnGet()
         {
             //onnistumisloki.Add(aika + ": Ohjelma käynnistyi");
@@ -94,17 +96,9 @@ namespace WeldingDataApplication.Pages
                 var o = 0;
                 var a = 0;
 
-                string WeldData =  System.IO.File.ReadAllText("./WeldData.json");
-                List <Database> data = JsonConvert.DeserializeObject<List<Database>>(WeldData);
+                string WeldData = System.IO.File.ReadAllText("./WeldData.json");
+                List<Database> data = JsonConvert.DeserializeObject<List<Database>>(WeldData);
 
-                if(data != null)
-                {
-                    foreach (var weldItem in data)
-                    {
-                       
-                        // Console.WriteLine(weldItem.Row);
-                    }
-                }
 
                 foreach (Weld.WeldInfo item in Message.WeldInfos)
                 {
@@ -113,24 +107,53 @@ namespace WeldingDataApplication.Pages
                     dbAika = item.Timestamp;
                     var wantedTime = aika - dbAika;
 
-                    //Otetaan item kiinni jossa on errori, ja tarkastetaan sen errorit
-                    if (item.State != "Ok")
+                    //Otetaan item kiinni jossa on errori, ja tarkastetaan sen errorit viimeisen 5 päivän ajalta
+                    if (item.State != "Ok" && wantedTime.Days <= 5)
                     {
                         // Haetaan detailit vain jossa on error olemassa
                         var rootWanted = await myHttpClient.GetFromJsonAsync<WeldDetails.RootObject>(url);
+                        var rootLenght = rootWanted.WeldData.LimitViolations.Count();
 
-                        foreach (var violation in rootWanted.WeldData.LimitViolations)
+                        if (rootLenght == 0)
                         {
-                            string valueType = violation.ValueType;
-                            string violationType = violation.ViolationType;
-                      
-                 
                             o++;
-                            // Hitsaukset jossa on error
-                            // Tarkastetaan onko id jo listassa, ennen sen lisäystä. // TODO tämä ei vielä relevantti
-                            // Jos Tieto on liian vanhaa, ei sitä oteta db listaan mukaan
-                            if (wantedTime.Days < 17)
+                            ErrorsList.Add(new Database
                             {
+                                Row = o,
+                                Id = item.Id,
+                                ViolationType = "Tuntematon",
+                                Valuetype = "Tuntematon",
+                                State = item.State,
+                                Time = item.Timestamp.ToShortTimeString(),
+                                Date = item.Timestamp.ToShortDateString(),
+                                TimeStamp = item.Timestamp,
+                                PartItemNumber = rootWanted.PartItemNumber,
+                                PartSerialNumber = rootWanted.PartSerialNumber,
+
+                            });
+                            DatabaseItems.Add(new Database
+                            {
+                                Row = a,
+                                Id = item.Id,
+                                PartItemNumber = rootWanted.PartItemNumber,
+                                PartSerialNumber = item.PartSerialNumber,
+                                State = item.State,
+                                TimeStamp = item.Timestamp,
+                                Time = item.Timestamp.ToShortTimeString(),
+                                Date = item.Timestamp.ToShortDateString(),
+                                ViolationType = "Tuntematon",
+                                Valuetype = "Tuntematon"
+                            });
+                            await sendEmail();
+                        }
+                        else
+                        {
+                            foreach (var violation in rootWanted.WeldData.LimitViolations)
+                            {
+                                string valueType = violation.ValueType;
+                                string violationType = violation.ViolationType;
+
+                                o++;
                                 ErrorsList.Add(new Database
                                 {
                                     Row = o,
@@ -143,18 +166,14 @@ namespace WeldingDataApplication.Pages
                                     TimeStamp = item.Timestamp,
                                     PartItemNumber = rootWanted.PartItemNumber,
                                     PartSerialNumber = rootWanted.PartSerialNumber,
-                                   
+
                                 });
-                                await sendEmail();
-                                // Päivitetään tiedot
-                                // Tämä alla oleva saatava toimimaan funtion kautta
-                                a++;
                                 DatabaseItems.Add(new Database
                                 {
                                     Row = a,
                                     Id = item.Id,
                                     PartItemNumber = rootWanted.PartItemNumber,
-                                    PartSerialNumber = rootWanted.PartSerialNumber,
+                                    PartSerialNumber = item.PartSerialNumber,
                                     State = item.State,
                                     TimeStamp = item.Timestamp,
                                     Time = item.Timestamp.ToShortTimeString(),
@@ -163,26 +182,14 @@ namespace WeldingDataApplication.Pages
                                     Valuetype = violation.ValueType
                                 });
 
+                                await sendEmail();
+
                             }
-                                                  
                         }
+                        a++;
+             
+
                     }
-                    // Tästä thtävä oma funktio, jota voi kutsua
-                    // error ja succsess listan teon yhteydessä
-                    // Jos Tieto on liian vanhaa, ei sitä oteta dblistaan mukaan
-                    //if(wantedTime.Days < 17  )
-                    //{
-                    //    a++;
-                    //    DatabaseItems.Add(new Database
-                    //    {
-                    //        Row = a,
-                    //        Id = item.Id,
-                    //        State = item.State,
-                    //        TimeStamp = item.Timestamp,
-                    //        Time = item.Timestamp.ToShortTimeString(),
-                    //        Date = item.Timestamp.ToShortDateString(),
-                    //    });
-                    //}
 
                     // Tarkastetaan onnistuneiden hitsausten määrä viimeiseltä 5:ltä päivältä
                     if (item.State != "NotOk" && wantedTime.Days <= 5)
@@ -198,6 +205,7 @@ namespace WeldingDataApplication.Pages
                             Date = item.Timestamp.ToShortDateString(),
                             TimeStamp = item.Timestamp
                         });
+
                         a++;
                         DatabaseItems.Add(new Database
                         {
@@ -207,18 +215,20 @@ namespace WeldingDataApplication.Pages
                             TimeStamp = item.Timestamp,
                             Time = item.Timestamp.ToShortTimeString(),
                             Date = item.Timestamp.ToShortDateString(),
+                            PartSerialNumber = item.PartSerialNumber,
+                            PartItemNumber = item.PartSerialNumber
                         });
 
                     }
 
                 }
-                
+
                 // Kirjoitetaan jsion 
                 string jsonString = JsonConvert.SerializeObject(DatabaseItems, Formatting.Indented);
                 byte[] bytes = Encoding.UTF8.GetBytes(jsonString);
                 System.IO.File.WriteAllBytes(filePath, bytes);
-       
-          
+
+
             }
             catch (Exception e)
             {
