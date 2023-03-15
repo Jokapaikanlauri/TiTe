@@ -132,7 +132,7 @@ namespace WeldingDataApplication.Pages
                                 ViolationType = "Tuntematon",
                                 Valuetype = "Tuntematon"
                             });
-                            await sendEmail();
+                            
                         }
                         else
                         {
@@ -170,13 +170,12 @@ namespace WeldingDataApplication.Pages
                                     Valuetype = violation.ValueType
                                 });
 
-                                await sendEmail();
+                               
 
                             }
                         }
                         a++;
-
-
+                        
                     }
 
                     // Tarkastetaan onnistuneiden hitsausten määrä viimeiseltä 5:ltä päivältä
@@ -209,6 +208,11 @@ namespace WeldingDataApplication.Pages
 
                     }
 
+                }
+
+                if (ErrorsList != null)
+                {
+                    await sendEmail();
                 }
 
                 // Kirjoitetaan jsion 
