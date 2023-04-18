@@ -7,3 +7,11 @@ WeldingDataApplication/.vs/
 /WeldingDataApplication/bin
 /WeldingDataApplication/.vs
 /WeldingDataApplication/obj/*
+/.vs/VSWorkspaceState.json
+/WeldingDataApplication/.vs/WeldingDataApplication/DesignTimeBuild/.dtbcache.v2
+/WeldingDataApplication/obj/Debug/net6.0/WeldingDataApplication.assets.cache
+/WeldingDataApplication/obj/Debug/net6.0/WeldingDataApplication.csproj.AssemblyReference.cache
+/WeldingDataApplication/obj/project.assets.json
+/WeldingDataApplication/obj/project.nuget.cache
+/WeldingDataApplication/obj/WeldingDataApplication.csproj.nuget.dgspec.json
+/WeldingDataApplication/obj/WeldingDataApplication.csproj.nuget.g.props
